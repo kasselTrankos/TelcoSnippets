@@ -1,3 +1,8 @@
 [
-	{ "caption": "Add file/folder(ctrl, model, service, view) to Fiddler", "command": "file_fiddler_injector", "args": {"paths": []} }
+	{ "caption": "Insert Telco-Snippet", 
+		"children":
+        [
+            { "command": "Spinner", "command": "telco_spinner", "args":{"paths":[]} },
+        ]
+	}
 ]
