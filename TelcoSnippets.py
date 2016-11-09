@@ -1,5 +1,4 @@
 import sublime, sublime_plugin, os, locale, sys, re
-from .jslex.jslex import JsLexer, js_to_c_for_gettext, Tok
 from .snippets.spinner import Spinner
 from .pyjsparser.pyjsparser import PyJsParser
 
