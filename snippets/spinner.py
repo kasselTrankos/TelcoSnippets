@@ -3,17 +3,13 @@ import logging
 
 class Spinner:
 	controllers = []
-
 	logger = logging.getLogger('myapp')
 	def parse(self, content):
 		self.logger.setLevel(logging.DEBUG)
-
 		hdlr = logging.FileHandler(os.path.join(os.path.abspath(os.path.dirname(__file__)),'mylogs.log'))
 		formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 		hdlr.setFormatter(formatter)
 		self.logger.addHandler(hdlr)
-		#self.logger.setLevel(logging.WARNING)
-			#self.logger.info(str(content.body[0].expressions))
 		self.localize(content['body'])
 
 	def localize(self, body):
@@ -31,66 +27,151 @@ class Spinner:
 			i+=1
 	def setPopup(self, serviceFuncs, bodyFuncs):
 		for item in serviceFuncs:
-			gotPopUp = self.functionForService(item, 'openPopup')
+			gotPopUp = self.functionForService(item, 'isOpenSpinner')
 			if gotPopUp==False:
-				openPopup = {
-                      'expression': {
-                        'operator': '=',
-                        'right': {
-                          'id': "None",
-                          'body': {
-                            'body': [
-                              {
-                                'expression': {
-                                  'arguments': [
-
-                                  ],
-                                  'callee': {
-                                    'object': {
-                                      'name': '$scope',
-                                      'type': 'Identifier'
-                                    },
-                                    'computed': "False",
-                                    'property': {
-                                      'name': 'manageDuplicateCustomerProblem',
-                                      'type': 'Identifier'
-                                    },
-                                    'type': 'MemberExpression'
-                                  },
-                                  'type': 'CallExpression'
-                                },
-                                'type': 'ExpressionStatement'
-                              }
-                            ],
-                            'type': 'BlockStatement'
-                          },
-                          'defaults': [
-
-                          ],
-                          'type': 'FunctionExpression',
-                          'params': [
-
-                          ],
-                          'generator': "False",
-                          'expression': "False"
-                        },
-                        'type': 'AssignmentExpression',
-                        'left': {
-                          'object': {
-                            'name': '$scope',
-                            'type': 'Identifier'
-                          },
-                          'computed': "False",
-                          'property': {
-                            'name': 'openPopup',
-                            'type': 'Identifier'
-                          },
-                          'type': 'MemberExpression'
-                        }
+				isOpenSpinner = {
+                  'type': 'ExpressionStatement',
+                  'expression': {
+                    'left': {
+                      'computed': "False",
+                      'object': {
+                        'name': '$scope',
+                        'type': 'Identifier'
                       },
-                      'type': 'ExpressionStatement'
+                      'type': 'MemberExpression',
+                      'property': {
+                        'name': 'openSpinner',
+                        'type': 'Identifier'
+                      }
+                    },
+                    'operator': '=',
+                    'type': 'AssignmentExpression',
+                    'right': {
+                      'defaults': [
+
+                      ],
+                      'generator': "False",
+                      'type': 'FunctionExpression',
+                      'body': {
+                        'type': 'BlockStatement',
+                        'body': [
+                          {
+                            'type': 'ExpressionStatement',
+                            'expression': {
+                              'arguments': [
+                                {
+                                  'value': 1.0,
+                                  'raw': "None",
+                                  'type': 'Literal'
+                                }
+                              ],
+                              'callee': {
+                                'computed': "False",
+                                'object': {
+                                  'computed': "False",
+                                  'object': {
+                                    'name': '$scope',
+                                    'type': 'Identifier'
+                                  },
+                                  'type': 'MemberExpression',
+                                  'property': {
+                                    'name': 'spinners',
+                                    'type': 'Identifier'
+                                  }
+                                },
+                                'type': 'MemberExpression',
+                                'property': {
+                                  'name': 'push',
+                                  'type': 'Identifier'
+                                }
+                              },
+                              'type': 'CallExpression'
+                            }
+                          },
+                          {
+                            'consequent': {
+                              'type': 'BlockStatement',
+                              'body': [
+                                {
+                                  'type': 'ExpressionStatement',
+                                  'expression': {
+                                    'left': {
+                                      'computed': "False",
+                                      'object': {
+                                        'name': '$scope',
+                                        'type': 'Identifier'
+                                      },
+                                      'type': 'MemberExpression',
+                                      'property': {
+                                        'name': 'isOpenSpinner',
+                                        'type': 'Identifier'
+                                      }
+                                    },
+                                    'operator': '=',
+                                    'type': 'AssignmentExpression',
+                                    'right': {
+                                      'name': '"True"',
+                                      'type': 'Identifier'
+                                    }
+                                  }
+                                },
+                                {
+                                  'type': 'ExpressionStatement',
+                                  'expression': {
+                                    'arguments': [
+                                      {
+                                        'name': '$scope',
+                                        'type': 'Identifier'
+                                      }
+                                    ],
+                                    'callee': {
+                                      'computed': "False",
+                                      'object': {
+                                        'name': 'PopupService',
+                                        'type': 'Identifier'
+                                      },
+                                      'type': 'MemberExpression',
+                                      'property': {
+                                        'name': 'getSpinner',
+                                        'type': 'Identifier'
+                                      }
+                                    },
+                                    'type': 'CallExpression'
+                                  }
+                                }
+                              ]
+                            },
+                            'alternate': "None",
+                            'type': 'IfStatement',
+                            'test': {
+                              'prefix': "True",
+                              'operator': '!',
+                              'type': 'UnaryExpression',
+                              'argument': {
+                                'computed': "False",
+                                'object': {
+                                  'name': '$scope',
+                                  'type': 'Identifier'
+                                },
+                                'type': 'MemberExpression',
+                                'property': {
+                                  'name': 'isOpenSpinner',
+                                  'type': 'Identifier'
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      'id': "None",
+                      'params': [
+
+                      ],
+                      'expression': "False"
                     }
-				bodyFuncs.append(openPopup)
+                  }
+                }
+				bodyFuncs.append(isOpenSpinner)
 
 	def getController(self, bodyElm):
 		if bodyElm['type']=='CallExpression' and bodyElm['callee']['property']['name']=='controller':

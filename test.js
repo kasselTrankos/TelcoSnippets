@@ -4,6 +4,7 @@ CNT.ngModule.controller('obtConfigInformationTechCPCOLController', ['$scope', '$
 	'obtConfigInformationTechCPCOLService',
 	'T3_CommunicationService', 'T3_CabeceraPresentacionService', '$state',
 	'T3_TrazaService', '$stateParams', 'T3_StateService', function($scope, $log, PopupService, gettextCatalog, obtConfigInformationTechCPCOLService, T3_CommunicationService, T3_CabeceraPresentacionService, $state, T3_TrazaService, $stateParams, T3_StateService){
+
 	$scope.init = function(){
 		/*Objeto que guarda los datos utilizados por el usuario*/
 		$scope.obtConfigInformationTechCPCOLView = {};
@@ -33,6 +34,13 @@ CNT.ngModule.controller('obtConfigInformationTechCPCOLController', ['$scope', '$
 			typeRole: 'customerData_sinDeuda',
 			conRepresentative: 'representativeData'
 		};
+		$scope.openSpinner = function(){
+            $scope.spinners.push(1);
+            if(!$scope.isOpenSpinner){
+                $scope.isOpenSpinner = true;
+                PopupService.getSpinner($scope);
+            }
+        };
 		/* Realizo la subscripciones a popUps */
 		$scope.getSubscription();
 		/* Defino obj. 'cgtSelectProductsIn' con tres parámetros para mostrar los botones desde la directiva */
