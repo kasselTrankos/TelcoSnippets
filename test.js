@@ -34,11 +34,11 @@ CNT.ngModule.controller('obtConfigInformationTechCPCOLController', ['$scope', '$
 			typeRole: 'customerData_sinDeuda',
 			conRepresentative: 'representativeData'
 		};
-		$scope.openSpinner = function(){
-            $scope.spinners.push(1);
-            if(!$scope.isOpenSpinner){
-                $scope.isOpenSpinner = true;
-                PopupService.getSpinner($scope);
+		$scope.closeSpinner = function(){
+            $scope.spinners.splice(-1,1);
+            if($scope.spinners.length===0){
+                PopupService.CloseSpinner();
+                $scope.isOpenSpinner = false;
             }
         };
 		/* Realizo la subscripciones a popUps */
