@@ -1,0 +1,3 @@
+[submodule "pyjsparser"]
+	path = pyjsparser
+	url = https://github.com/PiotrDabkowski/pyjsparser
