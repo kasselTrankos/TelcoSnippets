@@ -22,13 +22,8 @@ class Spinner:
 			ControllerName, arguments, bodyFuncs, bodyParams, serviceFuncs, serviceName = self.getController(elm['expression'])
 
 			if ControllerName!=False and  serviceName!=False:
-				#self.logger.info('ControllerName es: '+str(ControllerName))
-				#self.logger.info('Body Function es'+str(bodyFuncs))
-				#self.logger.info('Body SerrviceName es: '+str(serviceName))
-				#self.logger.info('Body Service function es: '+str(serviceFuncs))
 				self.setSpinnerInBody(bodyFuncs['body']['body'])
 				self.setSpinnerVarsInInit(bodyFuncs['body']['body'])
-				#self.logger.info('Body Function es despues de añadir popup: '+str(bodyFuncs))
 			i+=1
 	def setSpinnerVarsInInit(self, bodyFuncs):
 		init = self.findMethodByName('init', bodyFuncs)
@@ -55,11 +50,9 @@ class Spinner:
 			gotOpenSpinner = self.functionForService(item, 'isOpenSpinner')
 			gotCloseSpinner = self.functionForService(item, 'closeSpinner')
 		if gotCloseSpinner==False:
-			closeSpinner = closeSpinner.script
-			bodyFuncs.append(closeSpinner)
+			bodyFuncs.append(closeSpinner.script)
 		if gotOpenSpinner==False:
-			openSpinner = openSpinner.script
-			bodyFuncs.append(openSpinner)
+			bodyFuncs.append(openSpinner.script)
 
 	def getController(self, bodyElm):
 		if bodyElm['type']=='CallExpression' and bodyElm['callee']['property']['name']=='controller':

@@ -1,1 +1,0 @@
-use strictuse strictuse strict
