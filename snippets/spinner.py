@@ -2,6 +2,7 @@ import os, re, sublime, os, json
 import logging
 from .scripts import openSpinner
 from .scripts import closeSpinner
+from .scripts import initVarsSpinner
 
 class Spinner:
 	controllers = []
@@ -13,20 +14,41 @@ class Spinner:
 		hdlr.setFormatter(formatter)
 		self.logger.addHandler(hdlr)
 		self.localize(content['body'])
-
+		#self.logger.info('Terminado el BODY ::: '+str(content))
+		return content
 	def localize(self, body):
 		i = 0;
 		for elm in body:
 			ControllerName, arguments, bodyFuncs, bodyParams, serviceFuncs, serviceName = self.getController(elm['expression'])
+
 			if ControllerName!=False and  serviceName!=False:
-				self.logger.info('ControllerName es: '+str(ControllerName))
-				self.logger.info('Body Function es'+str(bodyFuncs))
-				self.logger.info('Body SerrviceName es: '+str(serviceName))
-				self.logger.info('Body Service function es: '+str(serviceFuncs))
-				self.setPopupBody(bodyFuncs['body']['body'])
-				self.logger.info('Body Function es despues de añadir popup: '+str(bodyFuncs))
+				#self.logger.info('ControllerName es: '+str(ControllerName))
+				#self.logger.info('Body Function es'+str(bodyFuncs))
+				#self.logger.info('Body SerrviceName es: '+str(serviceName))
+				#self.logger.info('Body Service function es: '+str(serviceFuncs))
+				self.setSpinnerInBody(bodyFuncs['body']['body'])
+				self.setSpinnerVarsInInit(bodyFuncs['body']['body'])
+				#self.logger.info('Body Function es despues de añadir popup: '+str(bodyFuncs))
 			i+=1
-	def setPopupBody(self, bodyFuncs):
+	def setSpinnerVarsInInit(self, bodyFuncs):
+		init = self.findMethodByName('init', bodyFuncs)
+		if self.isDeclaredScopeSpinners(init['right']['body']['body'], 'spinners')==False:
+			init['right']['body']['body'].append(initVarsSpinner.spinners)
+		if self.isDeclaredScopeSpinners(init['right']['body']['body'], 'isOpenSpinner')==False:
+			init['right']['body']['body'].append(initVarsSpinner.isOpenSpinner)
+	def isDeclaredScopeSpinners(self, initBody, property):
+		for assigment in initBody:
+			if assigment['expression']['type']=="AssignmentExpression":
+				if assigment['expression']['left']['property']['name']==property:
+					return True
+		return False
+
+	def findMethodByName(self, name, bodyFuncs):
+		for func in bodyFuncs:
+			if func['expression']['left']['property']['name']==name:
+				return func['expression']
+		return False
+	def setSpinnerInBody(self, bodyFuncs):
 		gotCloseSpinner = False
 		gotOpenSpinner = False
 		for item in bodyFuncs:

@@ -1,6 +1,8 @@
 import sublime, sublime_plugin, os, locale, sys, re
 from .snippets.spinner import Spinner
+from .snippets.angular import Angular
 from .pyjsparser.pyjsparser import PyJsParser
+
 
 class TelcoSnippetsCommand():
 	def init(self):
@@ -14,7 +16,9 @@ class TelcoSpinnerCommand(sublime_plugin.WindowCommand, TelcoSnippetsCommand):
 	def run(self, paths=[], parameters=None):
 		spinner = Spinner()
 		p = PyJsParser()
+		a = Angular()
 		content = self.load_content(paths[0])
 		#lexer = JsLexer()
 		#spinner.parse(lexer.lex(content))
-		spinner.parse(p.parse(content))
+		json = spinner.parse(p.parse(content))
+		a.create(paths[0], json)
