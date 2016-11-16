@@ -1,1 +1,1 @@
-use strict
+use strictuse strictuse strict

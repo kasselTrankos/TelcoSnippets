@@ -14,7 +14,7 @@ class Spinner:
 		hdlr.setFormatter(formatter)
 		self.logger.addHandler(hdlr)
 		self.localize(content['body'])
-		#self.logger.info('Terminado el BODY ::: '+str(content))
+		self.logger.info('Terminado el BODY STR ::: '+str(content))
 		return content
 	def localize(self, body):
 		i = 0;
@@ -85,9 +85,9 @@ class Spinner:
 	def functionForService(self, function, serviceName, arr=[], d=False):
 		if d==False:
 			d = function
-		for k, v in d.items():
+		for k,v in d.__dict__.items():
 			if isinstance(v, dict):
-				self.functionForService(function, serviceName, arr, v)
+				self.functionForService(function, serviceName, arr, d[k])
 			elif isinstance(v, list):
 				for item in v:
 					if isinstance(item, dict):

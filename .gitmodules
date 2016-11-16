@@ -1,3 +1,6 @@
 [submodule "pyjsparser"]
 	path = pyjsparser
 	url = https://github.com/PiotrDabkowski/pyjsparser
+[submodule "pyesprima"]
+	path = pyesprima
+	url = https://github.com/kasselTrankos/pyesprima
