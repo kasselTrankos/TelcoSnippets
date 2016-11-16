@@ -5,7 +5,6 @@ class Angular():
 		file = []
 		file.append(path)
 		file.append('test.js')
-
 		f = open(''.join(file),"w") #opens file with name of "test.txt"
 		f.write(self.doStr(json))
 		f.close()
@@ -17,10 +16,8 @@ class Angular():
 			if self.isExpression(el):
 				if self.isLiteral(el['expression']):
 					self.appendLiteral(el['expression'])
-				elif isCallExpression(el['expression']):
-					self.appendArguments(el['arguments'])
-
-
+				elif self.isCallExpression(el['expression']):
+					self.appendArguments(el['expression']['arguments'])
 
 	def isExpression(self, obj):
 		return obj['type']=='ExpressionStatement'

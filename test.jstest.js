@@ -1,0 +1,3 @@
+'use strict';
+'obtConfigInformationTechCPCOLController'
+'modalObtConfigInformationTechCPCOLController'
