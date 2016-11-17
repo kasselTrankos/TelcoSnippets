@@ -12,8 +12,9 @@ CNT.ngModule.controller(
 	'T3_TrazaService',
 	'$stateParams',
 	'T3_StateService',
-	]CNT.ngModule.controller(
+	]);
+CNT.ngModule.controller(
 	'modalObtConfigInformationTechCPCOLController',
 [	'$scope',
 	'$state',
-	]
+	]);

@@ -27,7 +27,9 @@ class Angular():
 							self.appendParentesis()
 							if 'arguments' in el['expression']:
 								self.appendArguments(el['expression'])
-							self.appendParentesis(False, true)
+							self.appendParentesis(False, True)
+							self.str.append(';')
+							self.str.append('\n')
 				#elif self.isCallExpression(el['expression']):
 				#	self.appendArguments(el['expression']['arguments'])
 
