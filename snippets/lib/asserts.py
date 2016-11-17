@@ -2,6 +2,8 @@ class Asserts():
 
 	def ExpressionStatement(self, obj):
 		return obj['type']=='ExpressionStatement'
+	def AssignmentExpression(self, obj):
+		return obj['type']=='AssignmentExpression'
 	def Literal(self, obj):
 		return obj['type']=='Literal'
 	def Arguments(self, obj):

@@ -18,33 +18,9 @@ class Angular():
 		f.close()
 	def doStr(self, json):
 		self.read(json['body'])
+		rspec_print(' EL STRING ES'+str(self.append.getStr()))
 		return ''.join(self.append.getStr())
 	def read(self, content):
 		for el in content:
 			if self.asserts.ExpressionStatement(el):
 				self.append.add(el['expression'])
-			#if self.isExpression(el):
-			#	if self.isLiteral(el['expression']):
-			#		self.appendLiteral(el['expression'])
-			#	elif self.gotCallee(el['expression']):
-			#		if self.isMemberExpression(el['expression']['callee']):
-			#			if self.gotObject(el['expression']['callee']):
-			#				self.appendCallExpression(el['expression']['callee']['object'], [])
-			#			if self.gotProperty(el['expression']['callee']):
-			#				self.append(el['expression']['callee']['property'], True)
-			#				self.appendParentesis()
-			#				if 'arguments' in el['expression']:
-			#					self.appendArguments(el['expression'])
-			#				self.appendParentesis(False, True)
-			#				self.str.append(';')
-			#				self.str.append('\n')
-				#elif self.isCallExpression(el['expression']):
-				#	self.appendArguments(el['expression']['arguments'])
-
-
-
-
-
-
-
-

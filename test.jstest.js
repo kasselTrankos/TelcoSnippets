@@ -1,5 +1,5 @@
 'use strict';
-CNT.ngModule.controller'obtConfigInformationTechCPCOLController',['$scope',
+CNT.ngModule.controller=()'obtConfigInformationTechCPCOLController',['$scope',
 '$log',
 'PopupService',
 'gettextCatalog',
@@ -21,31 +21,54 @@ function(
 	$state,
 	T3_TrazaService,
 	$stateParams,
-	T3_StateService){
-			$scope.init=function(){
-			$scope.obtConfigInformationTechCPCOLView=
-			$scope.obtConfigInformationTechCPCOLFunctionality=
-			$scope.obtConfigInformationTechCPCOLData=
+	T3_StateService){						
+			$scope.init=function(){						
+			$scope.obtConfigInformationTechCPCOLView={}
+						
+			$scope.obtConfigInformationTechCPCOLFunctionality={}
+						
+			$scope.obtConfigInformationTechCPCOLData={}
+				$scope.loadMultilanguage=()				T3_CommunicationService.subscribe=()				T3_StateService.init=()						
 			$scope.obtConfigInformationTechCPCOLFunctionality.datosPrevios=
-			$scope.obtConfigInformationTechCPCOLFunctionality.idPermiso=
-			$scope.objectWizard=
-			$scope.obtConfigInformationTechCPCOLFunctionality.paso2=
-			$scope.showPartyRoleHeaderIn=
-			$scope.closeSpinner=function(){}
-		$scope.cgtSelectProductsIn=
-		$scope.obtConfigInformationTechCPCOLFunctionality.habilitarCombo=
-		$scope.spinners=
-		$scope.isOpenSpinner=}
-	$scope.loadMultilanguage=function(){}
-	$scope.getSubscription=function(){}
-	$scope.findProductIdentificationData=function(){}
-	$scope.manageDuplicateCustomerProblem=function(){}
-	$scope.siguiente=function(){}
-	$scope.cancelar=function(){}
-	$scope.modalError=function(messageError){}
-	$scope.modalInfo=function(messageInfo){}
-	$scope.modalInfoBtnCancel=function(messageInfo){}
-	$scope.closeSpinner=function(){}
-	$scope.openSpinner=function(){}}]CNT.ngModule.controller'modalObtConfigInformationTechCPCOLController',['$scope','$state',function($scope,$state){
-			$scope.closePopup=function(){}
-		$scope.aceptarPopup=function(){}}]
+			obtConfigInformationTechCPCOLService.initialData.CGT_ObtConfigInformationTechCPCOL_IN						
+			$scope.obtConfigInformationTechCPCOLFunctionality.idPermiso="0"						
+			$scope.objectWizard=						
+			$scope.obtConfigInformationTechCPCOLFunctionality.paso2=false						
+			$scope.showPartyRoleHeaderIn={}
+						
+			$scope.closeSpinner=function(){				$scope.spinners.splice=()		
+}		$scope.getSubscription=()			
+		$scope.cgtSelectProductsIn={}
+		$scope.findProductIdentificationData=()			
+		$scope.obtConfigInformationTechCPCOLFunctionality.habilitarCombo=false			
+		$scope.spinners=			
+		$scope.isOpenSpinner=false
+}
+	$scope.loadMultilanguage=function(){		T3_CabeceraPresentacionService.resolveTranslationsCG=()
+}
+	$scope.getSubscription=function(){		T3_CommunicationService.subscribe=()
+}
+	$scope.findProductIdentificationData=function(){			obtConfigInformationTechCPCOLService.findProductIdentificationData=().then=()
+}
+	$scope.manageDuplicateCustomerProblem=function(){			obtConfigInformationTechCPCOLService.manageDuplicateCustomerProblem=().then=()
+}
+	$scope.siguiente=function(){		$scope.manageDuplicateCustomerProblem=()
+}
+	$scope.cancelar=function(){		$state.go=()
+}
+	$scope.modalError=function(messageError){				PopupService.getPopupGeneric=()
+}
+	$scope.modalInfo=function(messageInfo){				PopupService.getPopupGeneric=()
+}
+	$scope.modalInfoBtnCancel=function(messageInfo){				PopupService.getPopupGeneric=()
+}
+	$scope.closeSpinner=function(){		$scope.spinners.splice=()	
+}
+	$scope.openSpinner=function(){		$scope.push.spinners=()	
+}
+}]CNT.ngModule.controller=()'modalObtConfigInformationTechCPCOLController',['$scope','$state',function($scope,$state){						
+			$scope.closePopup=function(){				$scope.$close=()
+}			
+		$scope.aceptarPopup=function(){					$scope.$close=()
+}
+}]
