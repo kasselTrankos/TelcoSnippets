@@ -22,7 +22,7 @@ function(
 	T3_TrazaService,
 	$stateParams,
 	T3_StateService){
-		$scope.init=function(){
+			$scope.init=function(){
 			$scope.obtConfigInformationTechCPCOLView=
 			$scope.obtConfigInformationTechCPCOLFunctionality=
 			$scope.obtConfigInformationTechCPCOLData=
@@ -48,5 +48,5 @@ function(
 	$scope.closeSpinner=function(){}
 	$scope.openSpinner=function(){}}]);
 CNT.ngModule.controller('modalObtConfigInformationTechCPCOLController',['$scope','$state',function($scope,$state){
-		$scope.closePopup=function(){}
-	$scope.aceptarPopup=function(){}}]);
+			$scope.closePopup=function(){}
+		$scope.aceptarPopup=function(){}}]);

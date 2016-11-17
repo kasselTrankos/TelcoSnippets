@@ -1,5 +1,6 @@
 import sublime, sys, os
 from ..rspec.rspec_print import rspec_print
+import .lib.asserts
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)),'..', 'pyesprima', 'pyesprima'))
 import pyesprima
 class Angular():
@@ -17,48 +18,27 @@ class Angular():
 		return ''.join(self.str)
 	def read(self, content):
 		for el in content:
-			if self.isExpression(el):
-				if self.isLiteral(el['expression']):
-					self.appendLiteral(el['expression'])
-				elif self.gotCallee(el['expression']):
-					if self.isMemberExpression(el['expression']['callee']):
-						if self.gotObject(el['expression']['callee']):
-							self.appendCallExpression(el['expression']['callee']['object'], [])
-						if self.gotProperty(el['expression']['callee']):
-							self.append(el['expression']['callee']['property'], True)
-							self.appendParentesis()
-							if 'arguments' in el['expression']:
-								self.appendArguments(el['expression'])
-							self.appendParentesis(False, True)
-							self.str.append(';')
-							self.str.append('\n')
+			#if self.isExpression(el):
+			#	if self.isLiteral(el['expression']):
+			#		self.appendLiteral(el['expression'])
+			#	elif self.gotCallee(el['expression']):
+			#		if self.isMemberExpression(el['expression']['callee']):
+			#			if self.gotObject(el['expression']['callee']):
+			#				self.appendCallExpression(el['expression']['callee']['object'], [])
+			#			if self.gotProperty(el['expression']['callee']):
+			#				self.append(el['expression']['callee']['property'], True)
+			#				self.appendParentesis()
+			#				if 'arguments' in el['expression']:
+			#					self.appendArguments(el['expression'])
+			#				self.appendParentesis(False, True)
+			#				self.str.append(';')
+			#				self.str.append('\n')
 				#elif self.isCallExpression(el['expression']):
 				#	self.appendArguments(el['expression']['arguments'])
 
-	def append(self, elm, addDotPoint=False, addNewLine=False, addTabs=True ):
-		if addTabs:
-			self.str.append(''.join(self.tabs))
-		if self.isLiteral(elm):
-			self.appendLiteral(elm, addDotPoint, addNewLine)
-		if self.isIdentifier(elm):
-			self.appendIdentifier(elm, addDotPoint)
-		if self.isFunctionExpression(elm):
-			self.appendFunction(elm)
 
-	def isExpression(self, obj):
-		return obj['type']=='ExpressionStatement'
-	def isLiteral(self, obj):
-		return obj['type']=='Literal'
-	def isCallExpression(self, obj):
-		return obj['type']=='CallExpression'
-	def isArrayExpression(self, obj):
-		return obj['type']=='ArrayExpression'
-	def isMemberExpression(self, obj):
-		return obj['type']=='MemberExpression'
-	def isIdentifier(self, obj):
-		return obj['type']=='Identifier'
-	def isFunctionExpression(self, obj):
-		return obj['type']=='FunctionExpression'
+
+
 	def appendIdentifier(self, elm, addDotPoint=True):
 		if addDotPoint:
 			self.str.append('.')
@@ -88,12 +68,24 @@ class Angular():
 			self.str.append(']')
 	def appendComma(self):
 		self.str.append(',')
+
 	def appendNewLine(self):
 		self.str.append('\n')
+
+	def append(self, elm, addDotPoint=False, addNewLine=False, addTabs=True ):
+		if addTabs:
+			self.str.append(''.join(self.tabs))
+		if self.isLiteral(elm):
+			self.appendLiteral(elm, addDotPoint, addNewLine)
+		if self.isIdentifier(elm):
+			self.appendIdentifier(elm, addDotPoint)
+		if self.isFunctionExpression(elm):
+			self.appendFunction(elm, addTabs)
+		if self.isObjectExpression(elm):
+			self.appendObjectExpression(elm)
 	def appendFunction(self, obj, tabs=False):
 		self.str.append('function')
 		self.appendParentesis()
-
 		if 'params' in obj:
 			self.appendArguments(obj, 'params')
 		self.appendParentesis(False, True)
@@ -109,6 +101,7 @@ class Angular():
 		if len(self.tabs)>0:
 			self.tabs.pop()
 		self.appendKeyBrackets(False, True)
+
 	def appendBody(self, obj):
 		_body = []
 		for body in obj['body']['body']:
@@ -120,7 +113,8 @@ class Angular():
 			self.appendMemberExpression(obj['left'])
 		self.str.append(obj['operator'])
 		if obj['right']['type']=='FunctionExpression':
-			self.appendFunction(obj['right'], True)
+			self.append(obj['right'], False, False, False)
+
 
 	def appendArguments(self, args, nodeName='arguments'):
 		i=1
@@ -137,7 +131,6 @@ class Angular():
 						self.appendComma()
 						if len(arg['elements'])>4:
 							self.appendNewLine()
-
 					t+=1
 				self.appendBrackets(False, True)
 			else:
@@ -150,14 +143,7 @@ class Angular():
 		if len(self.tabs)>0:
 			self.tabs.pop()
 
-	def gotCallee(self, obj):
-		return obj['callee']
-	def gotObject(self, obj):
-		return obj['object']
-	def gotProperty(self, obj):
-		return obj['property']
-	def gotArguments(self, obj):
-		return obj['arguments']
+
 	def appendMemberExpression(self, obj):
 		self.addNewLine()
 		self.tabs.append('\t')
@@ -201,3 +187,7 @@ class Angular():
 		first, nodes = self.obtainTree(obj, [])
 		for i in range(len(nodes)):
 			self.append(nodes[i], i>0, False, False)
+	def appendObjectExpression(self, obj):
+		self.appendKeyBrackets(True, True)
+		self.addNewLine();
+
