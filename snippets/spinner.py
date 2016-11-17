@@ -24,6 +24,8 @@ class Spinner:
 				self.setPopup(serviceFuncs, bodyFuncs['body']['body'])
 				self.logger.info('Body Function es despues de añadir popup: '+str(bodyFuncs))
 			i+=1
+  def setPopupService():
+
 	def setPopup(self, serviceFuncs, bodyFuncs):
 		for item in serviceFuncs:
 			gotOpenSpinner = self.functionForService(item, 'isOpenSpinner')
