@@ -1,5 +1,5 @@
 'use strict';
-CNT.ngModule.controller('obtConfigInformationTechCPCOLController',['$scope',
+CNT.ngModule.controller'obtConfigInformationTechCPCOLController',['$scope',
 '$log',
 'PopupService',
 'gettextCatalog',
@@ -46,7 +46,6 @@ function(
 	$scope.modalInfo=function(messageInfo){}
 	$scope.modalInfoBtnCancel=function(messageInfo){}
 	$scope.closeSpinner=function(){}
-	$scope.openSpinner=function(){}}]);
-CNT.ngModule.controller('modalObtConfigInformationTechCPCOLController',['$scope','$state',function($scope,$state){
+	$scope.openSpinner=function(){}}]CNT.ngModule.controller'modalObtConfigInformationTechCPCOLController',['$scope','$state',function($scope,$state){
 			$scope.closePopup=function(){}
-		$scope.aceptarPopup=function(){}}]);
+		$scope.aceptarPopup=function(){}}]

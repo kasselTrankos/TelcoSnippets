@@ -1,21 +1,22 @@
+class Asserts():
 
-class Assert():
-
-	def isExpression(self, obj):
+	def ExpressionStatement(self, obj):
 		return obj['type']=='ExpressionStatement'
-	def isLiteral(self, obj):
+	def Literal(self, obj):
 		return obj['type']=='Literal'
-	def isCallExpression(self, obj):
+	def Arguments(self, obj):
+		return 'arguments' in obj
+	def CallExpression(self, obj):
 		return obj['type']=='CallExpression'
-	def isArrayExpression(self, obj):
+	def ArrayExpression(self, obj):
 		return obj['type']=='ArrayExpression'
-	def isMemberExpression(self, obj):
+	def MemberExpression(self, obj):
 		return obj['type']=='MemberExpression'
-	def isIdentifier(self, obj):
+	def Identifier(self, obj):
 		return obj['type']=='Identifier'
-	def isFunctionExpression(self, obj):
+	def FunctionExpression(self, obj):
 		return obj['type']=='FunctionExpression'
-	def isObjectExpression(self, obj):
+	def ObjectExpression(self, obj):
 		return obj['type']=='ObjectExpression'
 	def gotCallee(self, obj):
 		return obj['callee']

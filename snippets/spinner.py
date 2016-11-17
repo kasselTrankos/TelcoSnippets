@@ -14,7 +14,6 @@ class Spinner:
 		hdlr.setFormatter(formatter)
 		self.logger.addHandler(hdlr)
 		self.localize(content['body'])
-		self.logger.info('Terminado el BODY STR ::: '+str(content))
 		return content
 	def localize(self, body):
 		i = 0;
