@@ -12,7 +12,6 @@ CNT.ngModule.controller('obtConfigInformationTechCPCOLController', ['$scope', '$
 		$scope.obtConfigInformationTechCPCOLFunctionality = {};
 		/*objeto en el que guardamos los datos traidos del back*/
 		$scope.obtConfigInformationTechCPCOLData = {};
-
 		$scope.loadMultilanguage();
 		/* Subscribe a la función de Multiidioma*/
 		T3_CommunicationService.subscribe($scope, "AlertLanguageChanged", $scope.loadMultilanguage);
@@ -20,7 +19,6 @@ CNT.ngModule.controller('obtConfigInformationTechCPCOLController', ['$scope', '$
 		T3_StateService.init($scope, obtConfigInformationTechCPCOLService, {
 			CGT_ObtConfigInformationTechCPCOL_IN : $scope.cgtObtConfigInformationTechCPCOLIn || $stateParams.cgtObtConfigInformationTechCPCOLIn
 		});
-
 		$scope.obtConfigInformationTechCPCOLFunctionality.datosPrevios = obtConfigInformationTechCPCOLService.initialData.CGT_ObtConfigInformationTechCPCOL_IN;
 		/* defino vble. 'idPermiso' para indicar el id, por defecto '0' */
 		$scope.obtConfigInformationTechCPCOLFunctionality.idPermiso = "0";
