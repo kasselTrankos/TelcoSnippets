@@ -47,6 +47,7 @@ class Append():
 		_init = False
 		_first = False
 		_addCallee= False
+		_arguments = []
 		o = self.getItems(obj)
 		for k, v in o:
 			if k=='object':
@@ -55,30 +56,36 @@ class Append():
 				_append.append(v)
 			if k=='callee':
 				_addCallee=True
-
+			if k=='arguments':
+				for a in v:
+					_arguments.append(a)
 			if isinstance(v, pyesprima.jsdict) or isinstance(v, dict):
 				self.obtainTree(v, _append)
 		if _init!=False and 'name' in _init:
 			_first = _init
 			_append.insert(0, _init)
 		if _addCallee==True:
-			_append.append('=')
-			_append.append('()')
+			_append.append('(')
+			if len(_arguments)>0:
+				for _a in _arguments:
+					_append.append(_a)
+			_append.append(')')
 		return [_first, _append]
+
 	def CallExpression(self, obj, _append=[]):
 		modes = False
 		first, nodes = self.obtainTree(obj, [])
-		rspec_print('CALLEEE is '+str(obj))
+		self.Tab(True, True)
 		for i in range(len(nodes)):
 			if isinstance(nodes[i], str):
 				self.str.append(nodes[i])
 			else:
 				self.append(nodes[i], i>0, False, False)
+		self.Tab(False, False, True)
 
 
 	def ObjectExpression(self, obj):
 		self.KeyBrackets(True, True)
-		self.NewLine();
 
 	def Identifier(self, elm, addDotPoint=True):
 		if addDotPoint:
@@ -105,7 +112,7 @@ class Append():
 		if addDotPoint:
 			self.str.append(';')
 		if addNewLine:
-			self.str.append('\n')
+			self.NewLine()
 
 	def NewLine(self):
 		self.str.append('\n')

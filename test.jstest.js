@@ -1,5 +1,5 @@
 'use strict';
-CNT.ngModule.controller=()'obtConfigInformationTechCPCOLController',['$scope',
+	CNT.controller.ngModule('obtConfigInformationTechCPCOLController';)'obtConfigInformationTechCPCOLController',['$scope',
 '$log',
 'PopupService',
 'gettextCatalog',
@@ -22,53 +22,63 @@ function(
 	T3_TrazaService,
 	$stateParams,
 	T3_StateService){						
-			$scope.init=function(){						
-			$scope.obtConfigInformationTechCPCOLView={}
-						
-			$scope.obtConfigInformationTechCPCOLFunctionality={}
-						
-			$scope.obtConfigInformationTechCPCOLData={}
-				$scope.loadMultilanguage=()				T3_CommunicationService.subscribe=()				T3_StateService.init=()						
-			$scope.obtConfigInformationTechCPCOLFunctionality.datosPrevios=
-			obtConfigInformationTechCPCOLService.initialData.CGT_ObtConfigInformationTechCPCOL_IN						
-			$scope.obtConfigInformationTechCPCOLFunctionality.idPermiso="0"						
-			$scope.objectWizard=						
-			$scope.obtConfigInformationTechCPCOLFunctionality.paso2=false						
-			$scope.showPartyRoleHeaderIn={}
-						
-			$scope.closeSpinner=function(){				$scope.spinners.splice=()		
-}		$scope.getSubscription=()			
-		$scope.cgtSelectProductsIn={}
-		$scope.findProductIdentificationData=()			
-		$scope.obtConfigInformationTechCPCOLFunctionality.habilitarCombo=false			
-		$scope.spinners=			
-		$scope.isOpenSpinner=false
+							$scope.init=function(){						
+							$scope.obtConfigInformationTechCPCOLView={}						
+							$scope.obtConfigInformationTechCPCOLFunctionality={}						
+							$scope.obtConfigInformationTechCPCOLData={}							$scope.loadMultilanguage()							T3_CommunicationService.subscribe(.$scope"AlertLanguageChanged";
+									$scope.loadMultilanguage)							T3_StateService.init(.$scope.obtConfigInformationTechCPCOLService{})						
+							$scope.datosPrevios.obtConfigInformationTechCPCOLFunctionality=
+							obtConfigInformationTechCPCOLService.CGT_ObtConfigInformationTechCPCOL_IN.initialData						
+							$scope.idPermiso.obtConfigInformationTechCPCOLFunctionality="0"						
+							$scope.objectWizard=						
+							$scope.paso2.obtConfigInformationTechCPCOLFunctionality=false						
+							$scope.showPartyRoleHeaderIn={}						
+							$scope.closeSpinner=function(){							$scope.splice.spinners(1;)		
+}				$scope.getSubscription()			
+					$scope.cgtSelectProductsIn={}				$scope.findProductIdentificationData()			
+					$scope.habilitarCombo.obtConfigInformationTechCPCOLFunctionality=false			
+					$scope.spinners=			
+					$scope.isOpenSpinner=false
 }
-	$scope.loadMultilanguage=function(){		T3_CabeceraPresentacionService.resolveTranslationsCG=()
+			$scope.loadMultilanguage=function(){				T3_CabeceraPresentacionService.resolveTranslationsCG('obtConfigInformationTechCPCOL';
+							gettextCatalog.currentLanguage)
 }
-	$scope.getSubscription=function(){		T3_CommunicationService.subscribe=()
+			$scope.getSubscription=function(){				T3_CommunicationService.subscribe(.$scope"EGT_SelectProductsPublish";function(		event,		data){		
+})
 }
-	$scope.findProductIdentificationData=function(){			obtConfigInformationTechCPCOLService.findProductIdentificationData=().then=()
+			$scope.findProductIdentificationData=function(){					obtConfigInformationTechCPCOLService.then.findProductIdentificationData(.FindProductIdentificationData_IN)(function(		data){						
+							$scope.findProductIdentificationData.obtConfigInformationTechCPCOLData=data						
+							$scope.motivoDatos.obtConfigInformationTechCPCOLData=
+							data.cPMotive.product						
+							$scope.motivoId.obtConfigInformationTechCPCOLData=
+							data.id0;.cPMotive.product		
+}function(){				$scope.modalError('PRCL_M_000700';)
+})
 }
-	$scope.manageDuplicateCustomerProblem=function(){			obtConfigInformationTechCPCOLService.manageDuplicateCustomerProblem=().then=()
+			$scope.manageDuplicateCustomerProblem=function(){					obtConfigInformationTechCPCOLService.then.manageDuplicateCustomerProblem(.ManageDuplicateCustomerProblem_IN)(function(		data){							T3_CommunicationService.publish('EGT_ObtConfigInformationTechCPCOLOK';.data)						
+							$scope.manageDuplicateCustomerProblem.obtConfigInformationTechCPCOLData=
+							data.actionTask		
+}function(	errorCode){				T3_CommunicationService.publish('EGT_PrclReturnEmptyKO';.errorCode)	
+})
 }
-	$scope.siguiente=function(){		$scope.manageDuplicateCustomerProblem=()
+			$scope.siguiente=function(){				$scope.manageDuplicateCustomerProblem()
 }
-	$scope.cancelar=function(){		$state.go=()
+			$scope.cancelar=function(){				$state.go(
+							$scope.name.prevState.CGT_ObtConfigInformationTechCPCOL_IN)
 }
-	$scope.modalError=function(messageError){				PopupService.getPopupGeneric=()
+			$scope.modalError=function(messageError){						PopupService.getPopupGeneric(.$scope.controller.options)
 }
-	$scope.modalInfo=function(messageInfo){				PopupService.getPopupGeneric=()
+			$scope.modalInfo=function(messageInfo){						PopupService.getPopupGeneric(.$scope.controller.options)
 }
-	$scope.modalInfoBtnCancel=function(messageInfo){				PopupService.getPopupGeneric=()
+			$scope.modalInfoBtnCancel=function(messageInfo){						PopupService.getPopupGeneric(.$scope.controller.options)
 }
-	$scope.closeSpinner=function(){		$scope.spinners.splice=()	
+			$scope.closeSpinner=function(){				$scope.spinners.splice(None;)	
 }
-	$scope.openSpinner=function(){		$scope.push.spinners=()	
+			$scope.openSpinner=function(){				$scope.spinners.push(None;)	
 }
-}]CNT.ngModule.controller=()'modalObtConfigInformationTechCPCOLController',['$scope','$state',function($scope,$state){						
-			$scope.closePopup=function(){				$scope.$close=()
+}]	CNT.controller.ngModule('modalObtConfigInformationTechCPCOLController';)'modalObtConfigInformationTechCPCOLController',['$scope','$state',function($scope,$state){						
+							$scope.closePopup=function(){							$scope.$close()
 }			
-		$scope.aceptarPopup=function(){					$scope.$close=()
+					$scope.aceptarPopup=function(){							$scope.$close()
 }
 }]
