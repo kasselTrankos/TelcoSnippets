@@ -50,18 +50,20 @@ class Append():
 		_arguments = []
 		o = self.getItems(obj)
 		for k, v in o:
-			if k=='object':
+			if k=='object' and 'name' in v:
 				_init = v
 			if k=='property':
 				_append.append(v)
 			if k=='callee':
 				_addCallee=True
-			if k=='arguments':
+			if k=='a1rguments':
+				b =0
 				for a in v:
 					_arguments.append(a)
+					b+=1
 			if isinstance(v, pyesprima.jsdict) or isinstance(v, dict):
 				self.obtainTree(v, _append)
-		if _init!=False and 'name' in _init:
+		if _init!=False:
 			_first = _init
 			_append.insert(0, _init)
 		if _addCallee==True:
@@ -69,19 +71,21 @@ class Append():
 			if len(_arguments)>0:
 				for _a in _arguments:
 					_append.append(_a)
+					_append.append(',')
 			_append.append(')')
 		return [_first, _append]
 
 	def CallExpression(self, obj, _append=[]):
 		modes = False
+
 		first, nodes = self.obtainTree(obj, [])
-		self.Tab(True, True)
+		self.NewLine()
+		self.Tab()
 		for i in range(len(nodes)):
 			if isinstance(nodes[i], str):
 				self.str.append(nodes[i])
 			else:
-				self.append(nodes[i], i>0, False, False)
-		self.Tab(False, False, True)
+				self.append(nodes[i], i>0, False)
 
 
 	def ObjectExpression(self, obj):
@@ -126,6 +130,7 @@ class Append():
 			self.str.append('{')
 		if addClose:
 			self.str.append('}')
+			self.str.append(';')
 	def Brackets(self, addStart=True, addClose=False):
 		if addStart:
 			self.str.append('[')
@@ -139,28 +144,21 @@ class Append():
 
 
 	def Function(self, obj, tabs=False):
+
 		self.str.append('function')
 		self.Parentesis()
 		if 'params' in obj:
 			self.Arguments(obj, 'params')
 		self.Parentesis(False, True)
 		self.KeyBrackets()
-		self.tabs.append('\t')
 		if 'body' in obj:
-			if tabs==True:
-				self.tabs.append('\t')
 			self.Body(obj)
-			if tabs==True:
-				if len(self.tabs)>0:
-					self.tabs.pop()
-		if len(self.tabs)>0:
-			self.tabs.pop()
-		self.NewLine()
 		self.KeyBrackets(False, True)
 
 
 	def Body(self, obj):
 		_body = []
+		self.Tab()
 		for body in obj['body']['body']:
 			self.append(body)
 			#if self.asserts.ExpressionStatement(body):
@@ -169,19 +167,18 @@ class Append():
 
 	def AssignmentExpression(self, obj):
 		if 'left' in obj:
-			self.append(obj['left'])
+			self.append(obj['left'], False)
 			self.str.append(obj['operator'])
 		if 'right' in obj:
-			self.append(obj['right'], False, False, False)
+			self.append(obj['right'], False, False)
 		if 'callee' in obj:
-			self.append(obj['callee'], False, False, False)
+			self.append(obj['callee'], False, False)
 
 
 	def Arguments(self, args, nodeName='arguments'):
 		i=1
 		if len(args[nodeName])>4:
 			self.NewLine()
-			self.tabs.append('\t')
 		for arg in args[nodeName]:
 			if self.asserts.ArrayExpression(arg):
 				t=1
@@ -201,8 +198,6 @@ class Append():
 					if len(args[nodeName])>4:
 						self.NewLine()
 			i+=1
-		if len(self.tabs)>0:
-			self.tabs.pop()
 
 	def Tab(self, append=True, join=False, quit=False):
 		if append:
@@ -212,8 +207,16 @@ class Append():
 		if quit:
 			if len(self.tabs)>0:
 				self.tabs.pop()
+
 	def MemberExpression(self, obj):
 		self.NewLine()
-		self.Tab(True, True)
-		self.CallExpression(obj)
-		self.Tab(False, False, True)
+		if isinstance(obj, pyesprima.jsdict):
+			o = obj.__dict__
+		elif isinstance(obj, dict):
+			o = obj
+
+		for k,v in o.items():
+			if k=='object':
+				self.append(v)
+			if k== 'property':
+				self.Identifier(v, True)
