@@ -1,4 +1,4 @@
-import sublime, sublime_plugin, os, locale, sys, re
+import sublime,imp, sublime_plugin, os, locale, sys, re
 from .snippets.spinner import Spinner
 from .snippets.angular import Angular
 from .pyjsparser.pyjsparser import PyJsParser
@@ -7,6 +7,18 @@ sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pyespr
 #sublime.message_dialog(sys.version_info)
 #sublime.message_dialog(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pyesprima', 'pyesprima'))
 import pyesprima
+
+BASE_PATH = os.path.abspath(os.path.dirname(__file__))
+CODE_DIRS = [
+  'plugin_helpers',
+  'rspec',
+]
+sys.path += [BASE_PATH] + [os.path.join(BASE_PATH, f) for f in CODE_DIRS]
+# =======
+# reload plugin files on change
+if 'plugin_helpers.reloader' in sys.modules:
+  imp.reload(sys.modules['plugin_helpers.reloader'])
+import plugin_helpers.reloader
 
 
 class TelcoSnippetsCommand():
