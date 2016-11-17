@@ -1,20 +1,52 @@
 'use strict';
-CNT.ngModule.controller(
-	'obtConfigInformationTechCPCOLController',
-[	'$scope',
-	'$log',
-	'PopupService',
-	'gettextCatalog',
-	'obtConfigInformationTechCPCOLService',
-	'T3_CommunicationService',
-	'T3_CabeceraPresentacionService',
-	'$state',
-	'T3_TrazaService',
-	'$stateParams',
-	'T3_StateService',
-	]);
-CNT.ngModule.controller(
-	'modalObtConfigInformationTechCPCOLController',
-[	'$scope',
-	'$state',
-	]);
+CNT.ngModule.controller('obtConfigInformationTechCPCOLController',['$scope',
+'$log',
+'PopupService',
+'gettextCatalog',
+'obtConfigInformationTechCPCOLService',
+'T3_CommunicationService',
+'T3_CabeceraPresentacionService',
+'$state',
+'T3_TrazaService',
+'$stateParams',
+'T3_StateService',
+function(
+	$scope,
+	$log,
+	PopupService,
+	gettextCatalog,
+	obtConfigInformationTechCPCOLService,
+	T3_CommunicationService,
+	T3_CabeceraPresentacionService,
+	$state,
+	T3_TrazaService,
+	$stateParams,
+	T3_StateService){
+		$scope.init=function(){
+			$scope.obtConfigInformationTechCPCOLView=
+			$scope.obtConfigInformationTechCPCOLFunctionality=
+			$scope.obtConfigInformationTechCPCOLData=
+			$scope.obtConfigInformationTechCPCOLFunctionality.datosPrevios=
+			$scope.obtConfigInformationTechCPCOLFunctionality.idPermiso=
+			$scope.objectWizard=
+			$scope.obtConfigInformationTechCPCOLFunctionality.paso2=
+			$scope.showPartyRoleHeaderIn=
+			$scope.closeSpinner=function(){}
+		$scope.cgtSelectProductsIn=
+		$scope.obtConfigInformationTechCPCOLFunctionality.habilitarCombo=
+		$scope.spinners=
+		$scope.isOpenSpinner=}
+	$scope.loadMultilanguage=function(){}
+	$scope.getSubscription=function(){}
+	$scope.findProductIdentificationData=function(){}
+	$scope.manageDuplicateCustomerProblem=function(){}
+	$scope.siguiente=function(){}
+	$scope.cancelar=function(){}
+	$scope.modalError=function(messageError){}
+	$scope.modalInfo=function(messageInfo){}
+	$scope.modalInfoBtnCancel=function(messageInfo){}
+	$scope.closeSpinner=function(){}
+	$scope.openSpinner=function(){}}]);
+CNT.ngModule.controller('modalObtConfigInformationTechCPCOLController',['$scope','$state',function($scope,$state){
+		$scope.closePopup=function(){}
+	$scope.aceptarPopup=function(){}}]);
