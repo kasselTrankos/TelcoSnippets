@@ -80,7 +80,7 @@ class Append():
 
 		first, nodes = self.obtainTree(obj, [])
 		self.NewLine()
-		self.Tab()
+		#self.Tab()
 		for i in range(len(nodes)):
 			if isinstance(nodes[i], str):
 				self.str.append(nodes[i])
@@ -118,8 +118,6 @@ class Append():
 		if addNewLine:
 			self.NewLine()
 
-	def NewLine(self):
-		self.str.append('\n')
 	def Parentesis(self, addStart=True, addClose=False):
 		if addStart:
 			self.str.append('(')
@@ -158,7 +156,7 @@ class Append():
 
 	def Body(self, obj):
 		_body = []
-		self.Tab()
+		#self.Tab()
 		for body in obj['body']['body']:
 			self.append(body)
 			#if self.asserts.ExpressionStatement(body):
@@ -210,13 +208,15 @@ class Append():
 
 	def MemberExpression(self, obj):
 		self.NewLine()
+
 		if isinstance(obj, pyesprima.jsdict):
 			o = obj.__dict__
 		elif isinstance(obj, dict):
 			o = obj
-
+		_arr = []
 		for k,v in o.items():
 			if k=='object':
 				self.append(v)
+		for k,v in o.items():
 			if k== 'property':
 				self.Identifier(v, True)
