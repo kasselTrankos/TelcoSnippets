@@ -1,0 +1,259 @@
+<div class="container12" data-ng-init="init()" data-ng-controller="manageCPContactController">
+    <form name="manageCPContactForm" novalidate ng-if="showNotificationANDPersonContact">
+
+
+
+        <div class="row">
+            <!-- PANEL DESPLEGABLE DE PRIMER NIVEL -->
+            <div class="paneldesplegable-principal">
+                <div class="encabezado_panel_desplegable_principal" data-ng-if="isVisibleNotification">
+                    <div class="contenedor_informacion">
+                        <!--**contenedor cuenta** t3PanelDespCuenta, t3PanelDespEnlace
+                            **contenedor detalle problemas** t3PanelDespDetalle
+                            **contenedor dato principal**t3PanelDespDatoPrincipal y t3PanelDespCallAction-->
+                            <div class="contenedor_dato_principal _top5">
+                                <h3 class="tit-titular-antetitulo-1-nivel" data-translate>{{'manageCPContact-medNot' | translate}}</h3>
+                            </div>
+                        </div>
+                    <div class="contenedor_flecha">
+                        <a class="btn-desplegable-principal" data-ng-class="(visibleNotification)?'-plegar_contenido':''" href="javascript:void(0)" data-ng-click="desplegarNotification()"></a>
+                    </div>
+                </div>
+                <div class="contenedor_panel_desplegable_principal">
+                    <div class="row">
+                        <div class="col12 _top20" data-ng-if="visibleNotification && isVisibleNotification">
+                                <div class="contenedor-g-tabla" te-tabla data-ng-init="initApp('cargarResults')">
+                                    <div class="content_tabla ">
+                                        <table class="table -ellipsis colResizable colsizable" data-ng-class="(CGT_ManageCPContact_IN.action==='C')? 'tablaLectura':''">
+                                            <thead>
+                                                <tr class="cabecera_columnas">
+                                                    <!--Introduce campos de la cabecera t3TablaCabecera/t3TablaCabeceraOrden/t3TablaCabeceraCheck/t3TablaCabeceraRadio/t3TablaCabeceraEdit-->
+                                                    <th data-ng-if="CGT_ManageCPContact_IN.action==='C'">
+                                                        <span class="title"
+                                                       tooltip-popup-delay='500' tooltip-placement="bottom" tooltip-animation="true" tooltip="{{'manageCPContact-personaContacto'|translate}}" data-translate>manageCPContact-personaContacto</span>
+                                                    </th>
+                                                    <th data-ng-if="CGT_ManageCPContact_IN.action!=='C'">
+                                                        <span class="title"
+                                                       tooltip-popup-delay='500' tooltip-placement="bottom" tooltip-animation="true" tooltip="{{'manageCPContact-personaContactoAst'|translate}}" data-translate>manageCPContact-personaContactoAst</span>
+                                                    </th>
+                                                    <th class="_w10" data-ng-if="CGT_ManageCPContact_IN.action==='C'">
+                                                        <span class="title"
+                                                       tooltip-popup-delay='500' tooltip-placement="bottom" tooltip-animation="true" tooltip="{{'manageCPContact-tipoContacto'|translate}}">{{'manageCPContact-tipoContacto' | translate }}</span>
+                                                    </th>
+                                                    <th class="_w10" data-ng-if="CGT_ManageCPContact_IN.action!=='C'">
+                                                        <span class="title"
+                                                       tooltip-popup-delay='500' tooltip-placement="bottom" tooltip-animation="true" tooltip="{{'manageCPContact-tipoContacto'|translate}}">{{'manageCPContact-tipoContacto' | translate }}</span>
+                                                    </th>
+                                                    <th  data-ng-if="CGT_ManageCPContact_IN.action==='C'">
+                                                        <span class="title" tooltip-popup-delay='500' tooltip-placement="bottom" tooltip-animation="true" tooltip="{{'manageCPContact-selMedioContacto'|translate}}">{{'manageCPContact-medioContactoPlain' | translate}}</span>
+                                                    </th>
+                                                    <th  data-ng-if="CGT_ManageCPContact_IN.action!=='C'">
+                                                        <span class="title" tooltip-popup-delay='500' tooltip-placement="bottom" tooltip-animation="true" tooltip="{{'manageCPContact-medioContactoPlain'|translate}}">{{'manageCPContact-medioContactoPlain' | translate}}*</span>
+                                                    </th>
+                                                    <th data-ng-if="CGT_ManageCPContact_IN.action!=='C'">
+                                                       <!-- Hueco para icono de borrar-->
+                                                    </th>
+                                                    <th data-ng-if="CGT_ManageCPContact_IN.action!=='C'">
+                                                        <!-- Hueco para icono de añadir-->
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-if="!manageCPContactFunctionality.error && CGT_ManageCPContact_IN.action==='C'" data-ng-repeat="row in manageCPContactView.listPartyRoles_tipo2">
+                                                    <td>
+                                                        <div class="col3">
+                                                          <span>{{row.name}}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="col1">
+                                                            <span>{{row.contactMediumType.name}}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div>
+                                                             <span>{{row.contactMedium.value}}</span>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr data-ng-if="!manageCPContactFunctionality.error && CGT_ManageCPContact_IN.action!=='C'" data-ng-repeat="row in manageCPContactData.listaTemporal">
+                                                    <td>
+                                                        <div class="col2" data-ng-if="CGT_ManageCPContact_IN.action!=='C'">
+
+                                                            <select
+                                                            id="personaContacto"
+                                                            name="personaContacto_F"
+                                                            class="select-generico _margin10-b"
+                                                            data-ng-model="manageCPContactData.notifyPerson[$index]"
+                                                            data-ng-options="item.id as item.name for item in getFiltered(manageCPContactView.listPartyRoles_tipo2, $last)"
+                                                            data-ng-disabled="!$last"
+                                                            data-ng-required="false"
+                                                            data-ng-change="cargaTipos($index)">
+                                                            <option value="" data-translate>manageCPContact-selPersonaContacto</option>
+                                                            <!-- <option value=""
+                                                                data-translate>manageCPContact-selPersonaContacto</option>
+                                                                <option ng-repeat="item in manageCPContactView.listPartyRoles_tipo2"
+                                                                ng-if ="($parent.$last && !isIn_tmp_listPartyRoles_tipo2(item.id)) || !$parent.$last"
+                                                                ng-value="item.id">
+                                                                {{item.name}}
+                                                                </option> -->
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <!-- TIPO DE CONTACTO-->
+                                                    <td>
+                                                        <div class="col1" data-ng-if="CGT_ManageCPContact_IN.action!=='C'">
+                                                            <select class="select-generico _margin10-b" data-
+                                                            id="tipoContacto_$index"
+                                                            name="tipoContacto_F"
+                                                            data-ng-model="manageCPContactData.tipoContacto[$index]"
+                                                            data-ng-disabled="!manageCPContactView.tiposContacto[$index] || !$last"
+                                                            data-ng-options="item.id as getTranslate(item.name.multiLanguages)  for item in manageCPContactView.tiposContacto[$index]"
+                                                            data-ng-required="false"
+                                                            data-ng-change="cargaMedios($index)">
+                                                            <option value="" data-translate>manageCPContact-selTipoContacto</option>
+
+                                                                <!-- <option value="" data-translate>manageCPContact-selTipoContacto</option>
+                                                                <option
+                                                                ng-repeat="item in manageCPContactView.tiposContacto[$index]"
+                                                                ng-value="item.id"
+                                                                data-ng-selected="item.id===manageCPContactData.tipoContacto[$index]"
+                                                                 >
+                                                                    {{item.name.multiLanguages[0].value}}
+                                                                </option> -->
+                                                            </select>
+
+                                                        </div>
+
+                                                    </td>
+                                                    <!-- MEDIO DE CONTACTO -->
+                                                    <td>
+
+
+                                                        <div class="col3" data-ng-show="CGT_ManageCPContact_IN.action!=='C'">
+                                                            <ui-select
+                                                            ng-model="manageCPContactData.medioContacto[$index]"
+                                                            theme="select2"
+                                                            append-to-body="true"
+                                                            data-ng-disabled="!manageCPContactView.mediosContacto[$index] || !$last">
+                                                                <ui-select-match placeholder="{{selectContactMedium_translation}}">
+                                                                    {{$select.selected.value}}
+                                                                </ui-select-match>
+                                                                <ui-select-choices
+                                                                repeat="item in manageCPContactView.mediosContacto[$index] | filter: $select.search" refresh="refreshResultsMedios($select)" refresh-delay="0">
+                                                                    <span ng-bind="item.value">{{item.value}}</span>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+
+                                                    </td>
+                                                    <td data-ng-if="CGT_ManageCPContact_IN.action!=='C'">
+                                                        <button class="btn-call-action-tablas" data-ng-click="removeFila(row, $last)"  type="reset">
+                                                            <div class="icono tf-eliminar"></div>
+                                                        </button>
+                                                    </td>
+                                                    <td data-ng-if="CGT_ManageCPContact_IN.action!=='C'">
+                                                        <button class="btn-call-action-tablas" data-ng-click="addFila($index)" data-ng-if="$last" data-ng-disabled="!manageCPContactData.medioContacto[$index]">
+                                                            <div class="icono tf-anadir" ></div>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="col12" data-ng-if="isVisiblePersonContact">
+                            <div class="container-titular-antetitulo-2-nivel _top18" id="prueba1">
+                                <div class="antetitulo">
+                                    <h3 class="tit-titular-antetitulo-2-nivel" data-translate>manageCPContact-personaContacto</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col12" data-ng-if="isVisiblePersonContact">
+                                <div class="contenedor-g-tabla" te-tabla data-ng-init="initApp('cargarResults')">
+                                    <div class="content_tabla ">
+                                        <table class="table -ellipsis colResizable colsizable" data-ng-class="(action==='C')?'tablaLectura':''">
+                                            <thead>
+                                                <tr class="cabecera_columnas">
+                                                    <!--Introduce campos de la cabecera t3TablaCabecera/t3TablaCabeceraOrden/t3TablaCabeceraCheck/t3TablaCabeceraRadio/t3TablaCabeceraEdit-->
+                                                    <th>
+                                                        <span class="title" tooltip-popup-delay='500' tooltip-placement="bottom" tooltip-animation="true" tooltip="{{'manageCPContact-selPersonaContacto'|translate}}" data-translate>manageCPContact-selPersonaContactoAst</span>
+                                                    </th>
+                                                    <th data-ng-if="!esNuevo">
+                                                        <span class="title" tooltip-popup-delay='500' tooltip-placement="bottom" tooltip-animation="true" tooltip="{{'manageCPContact-medioContactoPlain'|translate}}">{{'manageCPContact-medioContactoPlain'}}*</span>
+                                                    </th>
+                                                    <th data-ng-if="esNuevo">
+                                                        <span class="title" tooltip-popup-delay='500' tooltip-placement="bottom" tooltip-animation="true" tooltip="{{'manageCPContact-newMedioContacto'|translate}}" data-translate>manageCPContact-newMedioContacto</span>
+                                                    </th>
+                                                    <th data-ng-if="action!=='C'">
+                                                       <!-- Hueco para icono de borrar-->
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+                                            <!--- peersona de contacto -->
+                                            <tbody>
+                                                <tr data-ng-if="!manageCPContactFunctionality.error" data-ng-repeat="row in manageCPContactData.listaTemporal_1 track by $index">
+                                                    <td>
+                                                        <div class="col3 _bottom10" data-ng-if="action!=='C'">
+                                                            <ui-select
+                                                            ng-model="cgtManageCPContactIn.personMediumType.person[$index]" theme="select2"
+                                                            append-to-body="true"
+                                                            data-ng-change="cargaMedios($index, 'person');">
+                                                                <ui-select-match placeholder="{{selectPerson_translation}}">
+                                                                    {{$select.selected.name}}
+                                                                </ui-select-match>
+                                                                <ui-select-choices
+                                                                repeat="item in manageCPContactView.listPartyRoles_tipo3 | filter: $select.search"
+                                                                 refresh="refreshResultsPersona($select)" refresh-delay="0">
+                                                                    <span ng-bind="item.name">{{item.name}}</span>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                        <div data-ng-if="action==='C'">
+                                                             <span>{{row.name}}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="col3" data-ng-if="action!=='C'">
+                                                            <ui-select
+                                                            ng-model="cgtManageCPContactIn.personMediumType.personMedioContacto[$index]"
+                                                            theme="select2"
+                                                            append-to-body="true"
+                                                            data-ng-disabled="!manageCPContactView.personMediosContacto[$index]" >
+                                                                <ui-select-match placeholder="{{selectContactMedium_translation}}">
+                                                                    {{$select.selected.value}}
+                                                                </ui-select-match>
+                                                                <ui-select-choices repeat="item in manageCPContactView.personMediosContacto[$index] | filter: $select.search" refresh="refreshResultsMedios($select)" refresh-delay="0">
+                                                                    <span ng-bind="item.value">{{item.value}}</span>
+                                                                </ui-select-choices>
+                                                            </ui-select>
+                                                        </div>
+                                                        <div data-ng-if="action==='C'">
+                                                             <span>{{row.contactMedium.value}}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td data-ng-if="action!=='C'">
+                                                        <button class="btn-call-action-tablas" data-ng-click="borrarPersona()" type="reset">
+                                                            <div class="icono tf-limpiar"></div>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </form>
+</div>

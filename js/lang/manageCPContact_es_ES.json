@@ -1,0 +1,17 @@
+{
+    "manageCPContact-medNot": "Medios de notificación",
+    "manageCPContact-personaContacto": "Persona de contacto",
+    "manageCPContact-personaContactoAst": "Persona de contacto*",
+    "manageCPContact-selPersonaContacto": "Seleccionar persona de contacto",
+    "manageCPContact-selPersonaContactoAst": "Seleccionar persona de contacto*",
+    "manageCPContact-newPersonaContacto": "Nueva persona de contacto*",
+    "manageCPContact-tipoContacto": "Tipo de contacto",
+    "manageCPContact-selTipoContacto": "Seleccionar tipo de contacto*",
+    "manageCPContact-selMedioContacto": "Seleccionar medio de contacto*",
+    "manageCPContact-selMedioContactoPlain": "Seleccionar medio de contacto",
+    "manageCPContact-medioContactoPlain": "Medio de contacto",
+    "manageCPContact-newMedioContacto": "Nuevo medio de contacto*",
+    "manageCPContact-principal-error": "Existen problemas para cargar algunos datos de la pantalla",
+    "manageCPContact-secundario-error": "Por favor, prueba a recargarlo de nuevo",
+    "manageCPContact-btnAceptar": "Aceptar"
+}

@@ -1,0 +1,3 @@
+CNT.ngModule.constant('manageCPContactConstant', {
+
+});
