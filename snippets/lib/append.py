@@ -19,7 +19,7 @@ class Append():
 		if self.asserts.Arguments(obj):
 			self.Arguments(obj)
 
-	def append(self, elm, addDotPoint=False, addNewLine=False, addTabs=True ):
+	def append(self, elm, addDotPoint=False, addNewLine=False, addTabs=True):
 		if addTabs:
 			self.str.append(''.join(self.tabs))
 		if self.asserts.Literal(elm):
@@ -134,11 +134,6 @@ class Append():
 			self.str.append('[')
 		if addClose:
 			self.str.append(']')
-	def Comma(self):
-		self.str.append(',')
-
-	def NewLine(self):
-		self.str.append('\n')
 
 
 	def Function(self, obj, tabs=False):
@@ -156,19 +151,17 @@ class Append():
 
 	def Body(self, obj):
 		_body = []
-		#self.Tab()
+		self.Tab()
 		for body in obj['body']['body']:
 			self.append(body)
-			#if self.asserts.ExpressionStatement(body):
-			#	if body['expression']['type']=='AssignmentExpression':
-			#		self.AssignmentExpression(body['expression'])
 
 	def AssignmentExpression(self, obj):
 		if 'left' in obj:
-			self.append(obj['left'], False)
-			self.str.append(obj['operator'])
+			self.append(obj['left'], False, False)
+
+		self.str.append(obj['operator'])
 		if 'right' in obj:
-			self.append(obj['right'], False, False)
+			self.append(obj['right'], False, False, False)
 		if 'callee' in obj:
 			self.append(obj['callee'], False, False)
 
@@ -177,6 +170,7 @@ class Append():
 		i=1
 		if len(args[nodeName])>4:
 			self.NewLine()
+			self.Tab()
 		for arg in args[nodeName]:
 			if self.asserts.ArrayExpression(arg):
 				t=1
@@ -197,14 +191,6 @@ class Append():
 						self.NewLine()
 			i+=1
 
-	def Tab(self, append=True, join=False, quit=False):
-		if append:
-			self.tabs.append('\t')
-		if join:
-			self.str.append(''.join(self.tabs))
-		if quit:
-			if len(self.tabs)>0:
-				self.tabs.pop()
 
 	def MemberExpression(self, obj):
 		self.NewLine()
@@ -220,3 +206,18 @@ class Append():
 		for k,v in o.items():
 			if k== 'property':
 				self.Identifier(v, True)
+
+	def Tab(self, append=True, join=False, quit=False):
+		if append:
+			self.tabs.append('\t')
+		if join:
+			self.str.append(''.join(self.tabs))
+		if quit:
+			if len(self.tabs)>0:
+				self.tabs.pop()
+
+	def Comma(self):
+		self.str.append(',')
+
+	def NewLine(self):
+		self.str.append('\n')
