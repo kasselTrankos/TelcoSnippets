@@ -19,15 +19,15 @@ class Append():
 		if self.asserts.Arguments(obj):
 			self.Arguments(obj)
 
-	def append(self, elm, addDotPoint=False, addNewLine=False, addTabs=True):
+	def append(self, elm, addDotPoint=False, addNewLine=False, addTabs=True, addComma=False):
 		if addTabs:
 			self.str.append(''.join(self.tabs))
 		if self.asserts.Literal(elm):
-			self.Literal(elm, addDotPoint, addNewLine)
+			self.Literal(elm, addDotPoint, addNewLine, addComma)
 		if self.asserts.Identifier(elm):
-			self.Identifier(elm, addDotPoint)
+			self.Identifier(elm, addDotPoint, addComma, addNewLine)
 		if self.asserts.FunctionExpression(elm):
-			self.Function(elm, addTabs)
+			self.FunctionExpression(elm, addTabs)
 		if self.asserts.ObjectExpression(elm):
 			self.ObjectExpression(elm)
 		if self.asserts.AssignmentExpression(elm):
@@ -48,35 +48,8 @@ class Append():
 	def ExpressionStatement(self, obj):
 		self.append(obj['expression'])
 
-	def obtainTree(self, obj, _append=[]):
-		nodes = []
-		_init = False
-		_first = False
-		_addCallee= False
-		_arguments = []
-		o = self.getItems(obj)
-		for k, v in o:
-			if k=='object' and 'name' in v:
-				_init = v
-			if k=='property':
-				_append.append(v)
-			if k=='callee':
-				_append.append(v)
-			if k=='a1rguments':
-				b =0
-				for a in v:
-					_arguments.append(a)
-					b+=1
-			if isinstance(v, pyesprima.jsdict) or isinstance(v, dict):
-				self.obtainTree(v, _append)
-		if _init!=False:
-			_first = _init
-			_append.insert(0, _init)
-		return [_first, _append]
-
 	def CallExpression(self, obj, _append=[]):
 		modes = False
-		#first, nodes = self.obtainTree (obj, [])
 		self.NewLine()
 		if isinstance(obj, pyesprima.jsdict):
 			o = obj.__dict__
@@ -85,17 +58,23 @@ class Append():
 		if 'callee' in obj:
 			self.append(obj['callee'])
 			self.Parentesis()
+
 			if 'arguments' in obj:
-				for arg in obj['arguments']:
-					self.append(arg)
+				l = len(obj['arguments'])
+				for i in range(l):
+					self.append(obj['arguments'][i], False, False, False, i>0)
 			self.Parentesis(False, True)
 
 	def ObjectExpression(self, obj):
 		self.KeyBrackets(True, True)
 
-	def Identifier(self, elm, addDotPoint=True):
+	def Identifier(self, elm, addDotPoint=True, addComma=False, addNewLine=False):
+		if addNewLine:
+			self.NewLine()
 		if addDotPoint:
-			self.str.append('.')
+			self.Point()
+		if addComma:
+			self.Comma()
 		self.str.append(elm['name'])
 
 	def getItems(self, obj):
@@ -109,22 +88,23 @@ class Append():
 
 
 
-	def Literal(self, elm, addDotPoint=True, addNewLine=True):
+	def Literal(self, elm, addDotPoint=True, addNewLine=True, addComma=False):
 
 		raw = elm['raw']
 		if raw == None:
 			raw = 'false'
 		self.str.append(raw)
 		if addDotPoint:
-			self.str.append(';')
+			self.DotComma()
+		if addComma:
+			self.Comma()
 		if addNewLine:
 			self.NewLine()
 
 
 
 
-	def Function(self, obj, tabs=False):
-
+	def FunctionExpression(self, obj, tabs=False):
 		self.str.append('function')
 		self.Parentesis()
 		if 'params' in obj:
@@ -155,22 +135,25 @@ class Append():
 			self.append(obj['callee'], False, False, False)
 
 	def ArrayExpression(self, obj):
+
 		self.Brackets()
 		l = len(obj['elements'])
+		if(l>4):
+			self.Tab()
 		for  i in range(l):
-			self.append(obj['elements'][i])
-			if i<l:
-				self.Comma()
+			self.append(obj['elements'][i], False, True, False, i<l)
+		if(l>4):
+			self.Tab(False, False, True)
 		self.Brackets(False, True)
 	def Arguments(self, args, nodeName='arguments'):
-		i=1
-		if len(args[nodeName])>4:
-			self.NewLine()
+
+		l =len(args[nodeName])
+		if l>4:
 			self.Tab()
-		for arg in args[nodeName]:
-			self.append(arg)
-
-
+		for i in range(l):
+			self.append(args[nodeName][i], False, l>4, l>4, i>0)
+		if l>4:
+			self.Tab(False, False, True)
 	def MemberExpression(self, obj, newLine=False):
 		if newLine:
 			self.NewLine()
@@ -198,6 +181,9 @@ class Append():
 
 	def Comma(self):
 		self.str.append(',')
+
+	def Point(self):
+		self.str.append('.')
 
 	def DotComma(self):
 		self.str.append(';')
