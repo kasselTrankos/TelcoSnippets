@@ -30,7 +30,7 @@ script = {
                       'arguments': [
                         {
                           'value': 1.0,
-                          'raw': "None",
+                          'raw': '1',
                           'type': 'Literal'
                         }
                       ],

@@ -38,7 +38,13 @@ class Append():
 			self.MemberExpression(elm)
 		if self.asserts.CallExpression(elm):
 			self.CallExpression(elm)
-
+		if self.asserts.ArrayExpression(elm):
+			self.ArrayExpression(elm)
+		if self.asserts.UnaryExpression(elm):
+			self.UnaryExpression(elm)
+	def UnaryExpression(self, obj):
+		self.str.append(obj['operator'])
+		self.str.append(obj['argument']['raw'])
 	def ExpressionStatement(self, obj):
 		self.append(obj['expression'])
 
@@ -66,13 +72,6 @@ class Append():
 		if _init!=False:
 			_first = _init
 			_append.insert(0, _init)
-		#if _addCallee==True:
-		#	_append.append('(')
-		#	if len(_arguments)>0:
-		#		for _a in _arguments:
-		#			_append.append(_a)
-		#			_append.append(',')
-		#	_append.append(')')
 		return [_first, _append]
 
 	def CallExpression(self, obj, _append=[]):
@@ -83,16 +82,12 @@ class Append():
 			o = obj.__dict__
 		elif isinstance(obj, dict):
 			o = obj
-
-		#t = 0
-		#for i in range(len(nodes)):
-		#	self.append(nodes[i], i>0, False, i==0)
-		#	t+=1
 		if 'callee' in obj:
 			self.append(obj['callee'])
 			self.Parentesis()
 			if 'arguments' in obj:
-				self.append(obj['arguments'])
+				for arg in obj['arguments']:
+					self.append(arg)
 			self.Parentesis(False, True)
 
 	def ObjectExpression(self, obj):
@@ -159,31 +154,21 @@ class Append():
 		if 'callee' in obj:
 			self.append(obj['callee'], False, False, False)
 
-
+	def ArrayExpression(self, obj):
+		self.Brackets()
+		l = len(obj['elements'])
+		for  i in range(l):
+			self.append(obj['elements'][i])
+			if i<l:
+				self.Comma()
+		self.Brackets(False, True)
 	def Arguments(self, args, nodeName='arguments'):
 		i=1
 		if len(args[nodeName])>4:
 			self.NewLine()
 			self.Tab()
 		for arg in args[nodeName]:
-			if self.asserts.ArrayExpression(arg):
-				t=1
-				self.Brackets()
-				for item in arg['elements']:
-					self.append(item, False)
-					if t<len(arg['elements']):
-						self.Comma()
-						if len(arg['elements'])>4:
-							self.NewLine()
-					t+=1
-				self.Brackets(False, True)
-			else:
-				self.append(arg, False)
-				if i<len(args[nodeName]):
-					self.Comma()
-					if len(args[nodeName])>4:
-						self.NewLine()
-			i+=1
+			self.append(arg)
 
 
 	def MemberExpression(self, obj, newLine=False):
@@ -194,13 +179,13 @@ class Append():
 			o = obj.__dict__
 		elif isinstance(obj, dict):
 			o = obj
-		_arr = []
+
 		for k,v in o.items():
 			if k=='object':
 				self.append(v)
 		for k,v in o.items():
 			if k== 'property':
-				self.Identifier(v, True)
+				self.append(v, True, False, False)
 
 	def Tab(self, append=True, join=False, quit=False):
 		if append:

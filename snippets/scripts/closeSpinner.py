@@ -34,7 +34,7 @@ script = {
 	                        {
 	                          'prefix': "True",
 	                          'argument': {
-	                            'raw': "None",
+	                            'raw': '1',
 	                            'value': 1.0,
 	                            'type': 'Literal'
 	                          },
@@ -42,7 +42,7 @@ script = {
 	                          'type': 'UnaryExpression'
 	                        },
 	                        {
-	                          'raw': "None",
+	                          'raw': '1',
 	                          'value': 1.0,
 	                          'type': 'Literal'
 	                        }

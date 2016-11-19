@@ -1,11 +1,16 @@
+from ...rspec.rspec_print import rspec_print
 class Asserts():
+
+	def Literal(self, obj):
+		if 'type' in obj:
+			return obj['type']=='Literal'
+		return False
 
 	def ExpressionStatement(self, obj):
 		return obj['type']=='ExpressionStatement'
 	def AssignmentExpression(self, obj):
 		return obj['type']=='AssignmentExpression'
-	def Literal(self, obj):
-		return obj['type']=='Literal'
+
 	def Arguments(self, obj):
 		return 'arguments' in obj
 	def CallExpression(self, obj):
@@ -15,7 +20,13 @@ class Asserts():
 	def MemberExpression(self, obj):
 		return obj['type']=='MemberExpression'
 	def Identifier(self, obj):
-		return obj['type']=='Identifier'
+		if 'type' in obj:
+			return obj['type']=='Identifier'
+		return False
+	def UnaryExpression(self, obj):
+		if 'type' in obj:
+			return obj['type']=='UnaryExpression'
+		return False
 	def FunctionExpression(self, obj):
 		return obj['type']=='FunctionExpression'
 	def ObjectExpression(self, obj):

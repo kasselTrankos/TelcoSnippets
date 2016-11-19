@@ -32,13 +32,7 @@ CNT.ngModule.controller('obtConfigInformationTechCPCOLController', ['$scope', '$
 			typeRole: 'customerData_sinDeuda',
 			conRepresentative: 'representativeData'
 		};
-		$scope.closeSpinner = function(){
-            $scope.spinners.splice(-1,1);
-            if($scope.spinners.length===0){
-                PopupService.CloseSpinner();
-                $scope.isOpenSpinner = false;
-            }
-        };
+
 		/* Realizo la subscripciones a popUps */
 		$scope.getSubscription();
 		/* Defino obj. 'cgtSelectProductsIn' con tres parámetros para mostrar los botones desde la directiva */

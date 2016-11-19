@@ -18,6 +18,7 @@ class Angular():
 		f.close()
 	def doStr(self, json):
 		self.read(json['body'])
+		rspec_print('STR:: is : '+str(self.append.getStr()))
 		return ''.join(self.append.getStr())
 	def read(self, content):
 		for el in content:
