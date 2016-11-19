@@ -23,81 +23,94 @@ CNT.ngModule.controller('obtConfigInformationTechCPCOLController',[	'$scope',
 		T3_TrazaService,
 		$stateParams,
 		T3_StateService){				
-$scope.init=function(){						
-$scope.obtConfigInformationTechCPCOLView={};						
-$scope.obtConfigInformationTechCPCOLFunctionality={};						
-$scope.obtConfigInformationTechCPCOLData={};						
+				$scope.init=function(){						
+						$scope.obtConfigInformationTechCPCOLView={};						
+						$scope.obtConfigInformationTechCPCOLFunctionality={};						
+						$scope.obtConfigInformationTechCPCOLData={};						
 						$scope.loadMultilanguage();						
 						T3_CommunicationService.subscribe($scope,"AlertLanguageChanged",$scope.loadMultilanguage);						
-						T3_StateService.init($scope,obtConfigInformationTechCPCOLService,{});						
+						T3_StateService.init($scope,obtConfigInformationTechCPCOLService,{			
+			CGT_ObtConfigInformationTechCPCOL_IN:});						
 									$scope.obtConfigInformationTechCPCOLFunctionality.datosPrevios=obtConfigInformationTechCPCOLService.initialData.CGT_ObtConfigInformationTechCPCOL_IN;						
 									$scope.obtConfigInformationTechCPCOLFunctionality.idPermiso="0";						
-						$scope.objectWizard=[{}{}];						
+						$scope.objectWizard=[{			
+			"name":"PASO 1",			
+			"desc":"Selección del producto y motivo",			
+			"id":"0"}{			
+			"name":"PASO 2",			
+			"desc":"Apertura y gestión del problema",			
+			"id":"1"}];						
 									$scope.obtConfigInformationTechCPCOLFunctionality.paso2=false;						
-						$scope.showPartyRoleHeaderIn={};						
+						$scope.showPartyRoleHeaderIn={			
+			typeRole:'customerData_sinDeuda',			
+			conRepresentative:'representativeData'};						
 						$scope.getSubscription();						
-						$scope.cgtSelectProductsIn={};						
+						$scope.cgtSelectProductsIn={			
+			"showRestrictions":true,			
+			"showPrices":true,			
+			"showRelations":true,			
+			"idProduct":true};						
 						$scope.findProductIdentificationData();						
 									$scope.obtConfigInformationTechCPCOLFunctionality.habilitarCombo=false;						
 						$scope.spinners=[];						
 						$scope.isOpenSpinner=false;
-};						
+			};						
 						$scope.loadMultilanguage=function(){								
 								T3_CabeceraPresentacionService.resolveTranslationsCG('obtConfigInformationTechCPCOL',gettextCatalog.currentLanguage);
-};								
+				};								
 								$scope.getSubscription=function(){										
 										T3_CommunicationService.subscribe($scope,"EGT_SelectProductsPublish",function(
 						event,
 						data){						
-});
-};												
+						});
+						};												
 												$scope.findProductIdentificationData=function(){																					
 														
 														obtConfigInformationTechCPCOLService.findProductIdentificationData(FindProductIdentificationData_IN);.then(function(
 								data){																
-$scope.obtConfigInformationTechCPCOLData.findProductIdentificationData=data;																
-$scope.obtConfigInformationTechCPCOLData.motivoDatos=data.product.cPMotive;																
-$scope.obtConfigInformationTechCPCOLData.motivoId=data.product.cPMotive0;.id;								
-}function(){																		
+																								$scope.obtConfigInformationTechCPCOLData.findProductIdentificationData=data;																
+																								$scope.obtConfigInformationTechCPCOLData.motivoDatos=data.product.cPMotive;																
+																								$scope.obtConfigInformationTechCPCOLData.motivoId=data.product.cPMotive0;.id;								
+								}function(){																		
 																		$scope.modalError('PRCL_M_000700');
-});
-};																		
+									});
+									};																		
 																		$scope.manageDuplicateCustomerProblem=function(){																														
 																				
 																				obtConfigInformationTechCPCOLService.manageDuplicateCustomerProblem(ManageDuplicateCustomerProblem_IN);.then(function(
 											data){																						
 																						T3_CommunicationService.publish('EGT_ObtConfigInformationTechCPCOLOK',data);																						
 																																	$scope.obtConfigInformationTechCPCOLData.manageDuplicateCustomerProblem=data.actionTask;											
-}function(
+											}function(
 												errorCode){																								
 																								T3_CommunicationService.publish('EGT_PrclReturnEmptyKO',errorCode);												
-});
-};																								
+												});
+												};																								
 																								$scope.siguiente=function(){																										
 																										$scope.manageDuplicateCustomerProblem();
-};																										
+													};																										
 																										$scope.cancelar=function(){																												
 																												$state.go($scope.CGT_ObtConfigInformationTechCPCOL_IN.prevState.name);
-};																												
+														};																												
 																												$scope.modalError=function(
 															messageError){																																																												
 																														PopupService.getPopupGeneric($scope,controller,options);
-};																														
+															};																														
 																														$scope.modalInfo=function(
 																messageInfo){																																																																
 																																PopupService.getPopupGeneric($scope,controller,options);
-};																																
+																};																																
 																																$scope.modalInfoBtnCancel=function(
 																	messageInfo){																																																																				
 																																		PopupService.getPopupGeneric($scope,controller,options);
-};																																		
+																	};																																		
 																																		$scope.closeSpinner=function(){																																				
 																																																						$scope.spinners.splice(-11);																		
-};																																				
+																		};																																				
 																																				$scope.openSpinner=function(){																																						
 																																																									$scope.spinners.push(1);																			
-};
-}]);'obtConfigInformationTechCPCOLController'[																			'$scope',
+																			};
+																			}]);'obtConfigInformationTechCPCOLController'[																			'$scope',
 																			'$log',
 																			'PopupService',
 																			'gettextCatalog',
@@ -126,95 +139,108 @@ $scope.obtConfigInformationTechCPCOLData.motivoId=data.product.cPMotive0;.id;
 																																										$scope.obtConfigInformationTechCPCOLData={};																																										
 																																										$scope.loadMultilanguage();																																										
 																																										T3_CommunicationService.subscribe($scope,"AlertLanguageChanged",$scope.loadMultilanguage);																																										
-																																										T3_StateService.init($scope,obtConfigInformationTechCPCOLService,{});																																										
+																																										T3_StateService.init($scope,obtConfigInformationTechCPCOLService,{																					
+																					CGT_ObtConfigInformationTechCPCOL_IN:});																																										
 																																																															$scope.obtConfigInformationTechCPCOLFunctionality.datosPrevios=obtConfigInformationTechCPCOLService.initialData.CGT_ObtConfigInformationTechCPCOL_IN;																																										
 																																																															$scope.obtConfigInformationTechCPCOLFunctionality.idPermiso="0";																																										
-																																										$scope.objectWizard=[{}{}];																																										
+																																										$scope.objectWizard=[{																					
+																					"name":"PASO 1",																					
+																					"desc":"Selección del producto y motivo",																					
+																					"id":"0"}{																					
+																					"name":"PASO 2",																					
+																					"desc":"Apertura y gestión del problema",																					
+																					"id":"1"}];																																										
 																																																															$scope.obtConfigInformationTechCPCOLFunctionality.paso2=false;																																										
-																																										$scope.showPartyRoleHeaderIn={};																																										
+																																										$scope.showPartyRoleHeaderIn={																					
+																					typeRole:'customerData_sinDeuda',																					
+																					conRepresentative:'representativeData'};																																										
 																																										$scope.getSubscription();																																										
-																																										$scope.cgtSelectProductsIn={};																																										
+																																										$scope.cgtSelectProductsIn={																					
+																					"showRestrictions":true,																					
+																					"showPrices":true,																					
+																					"showRelations":true,																					
+																					"idProduct":true};																																										
 																																										$scope.findProductIdentificationData();																																										
 																																																															$scope.obtConfigInformationTechCPCOLFunctionality.habilitarCombo=false;																																										
 																																										$scope.spinners=[];																																										
 																																										$scope.isOpenSpinner=false;
-};																																										
+																					};																																										
 																																										$scope.loadMultilanguage=function(){																																												
 																																												T3_CabeceraPresentacionService.resolveTranslationsCG('obtConfigInformationTechCPCOL',gettextCatalog.currentLanguage);
-};																																												
+																						};																																												
 																																												$scope.getSubscription=function(){																																														
 																																														T3_CommunicationService.subscribe($scope,"EGT_SelectProductsPublish",function(
 																								event,
 																								data){																								
-});
-};																																																
+																								});
+																								};																																																
 																																																$scope.findProductIdentificationData=function(){																																																																											
 																																																		
 																																																		obtConfigInformationTechCPCOLService.findProductIdentificationData(FindProductIdentificationData_IN);.then(function(
 																										data){																																																				
-$scope.obtConfigInformationTechCPCOLData.findProductIdentificationData=data;																																																				
-$scope.obtConfigInformationTechCPCOLData.motivoDatos=data.product.cPMotive;																																																				
-$scope.obtConfigInformationTechCPCOLData.motivoId=data.product.cPMotive0;.id;																										
-}function(){																																																						
+																																																																														$scope.obtConfigInformationTechCPCOLData.findProductIdentificationData=data;																																																				
+																																																																														$scope.obtConfigInformationTechCPCOLData.motivoDatos=data.product.cPMotive;																																																				
+																																																																														$scope.obtConfigInformationTechCPCOLData.motivoId=data.product.cPMotive0;.id;																										
+																										}function(){																																																						
 																																																						$scope.modalError('PRCL_M_000700');
-});
-};																																																						
+																											});
+																											};																																																						
 																																																						$scope.manageDuplicateCustomerProblem=function(){																																																																																				
 																																																								
 																																																								obtConfigInformationTechCPCOLService.manageDuplicateCustomerProblem(ManageDuplicateCustomerProblem_IN);.then(function(
 																													data){																																																										
 																																																										T3_CommunicationService.publish('EGT_ObtConfigInformationTechCPCOLOK',data);																																																										
 																																																																																							$scope.obtConfigInformationTechCPCOLData.manageDuplicateCustomerProblem=data.actionTask;																													
-}function(
+																													}function(
 																														errorCode){																																																												
 																																																												T3_CommunicationService.publish('EGT_PrclReturnEmptyKO',errorCode);																														
-});
-};																																																												
+																														});
+																														};																																																												
 																																																												$scope.siguiente=function(){																																																														
 																																																														$scope.manageDuplicateCustomerProblem();
-};																																																														
+																															};																																																														
 																																																														$scope.cancelar=function(){																																																																
 																																																																$state.go($scope.CGT_ObtConfigInformationTechCPCOL_IN.prevState.name);
-};																																																																
+																																};																																																																
 																																																																$scope.modalError=function(
 																																	messageError){																																																																																																																																				
 																																																																		PopupService.getPopupGeneric($scope,controller,options);
-};																																																																		
+																																	};																																																																		
 																																																																		$scope.modalInfo=function(
 																																		messageInfo){																																																																																																																																								
 																																																																				PopupService.getPopupGeneric($scope,controller,options);
-};																																																																				
+																																		};																																																																				
 																																																																				$scope.modalInfoBtnCancel=function(
 																																			messageInfo){																																																																																																																																												
 																																																																						PopupService.getPopupGeneric($scope,controller,options);
-};																																																																						
+																																			};																																																																						
 																																																																						$scope.closeSpinner=function(){																																																																								
 																																																																																																												$scope.spinners.splice(-11);																																				
-};																																																																								
+																																				};																																																																								
 																																																																								$scope.openSpinner=function(){																																																																										
 																																																																																																															$scope.spinners.push(1);																																					
-};
-}]
+																																					};
+																																					}]
 																																																																																																												CNT.ngModule.controller('modalObtConfigInformationTechCPCOLController',['$scope',
 '$state',
 function(
 																																					$scope,
 																																					$state){																																																																										
-$scope.closePopup=function(){																																																																												
+																																																																										$scope.closePopup=function(){																																																																												
 																																																																												$scope.$close();
-};																																																																												
-$scope.aceptarPopup=function(){																																																																																																																																																																																																			
+																																						};																																																																												
+																																																																												$scope.aceptarPopup=function(){																																																																																																																																																																																																			
 																																																																														$scope.$close();
-};
-}]);'modalObtConfigInformationTechCPCOLController'['$scope',
+																																							};
+																																							}]);'modalObtConfigInformationTechCPCOLController'['$scope',
 '$state',
 function(
 																																								$scope,
 																																								$state){																																																																																
 																																																																																$scope.closePopup=function(){																																																																																		
 																																																																																		$scope.$close();
-};																																																																																		
+																																									};																																																																																		
 																																																																																		$scope.aceptarPopup=function(){																																																																																																																																																																																																																		
 																																																																																				$scope.$close();
-};
-}]
+																																										};
+																																										}]

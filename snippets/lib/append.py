@@ -44,6 +44,8 @@ class Append():
 			self.ArrayExpression(elm)
 		if self.asserts.UnaryExpression(elm):
 			self.UnaryExpression(elm)
+		if self.asserts.Property(elm):
+			self.Property(elm)
 	def UnaryExpression(self, obj):
 		self.str.append(obj['operator'])
 		self.str.append(obj['argument']['raw'])
@@ -72,7 +74,21 @@ class Append():
 		for i in range(l):
 			self.append(obj[i], False, False, False, i<l-1)
 	def ObjectExpression(self, obj):
-		self.KeyBrackets(True, True)
+
+		self.KeyBrackets()
+		if 'properties' in obj:
+			l = len(obj['properties'])
+			for i in range(l):
+				self.append(obj['properties'][i])
+				if i<l-1:
+					self.Comma()
+		self.KeyBrackets(False, True)
+
+	def Property(self, obj):
+		self.NewLine()
+		self.append(obj['key'])
+		self.DoublePoint()
+		self.append(obj['value'], False, False, False)
 
 	def Identifier(self, elm, addDotPoint=True, addComma=False, addNewLine=False):
 		if addNewLine:
@@ -123,6 +139,7 @@ class Append():
 		if 'body' in obj:
 			self.Body(obj)
 		self.NewLine()
+		self.Tab(False, True)
 		self.KeyBrackets(False, True)
 
 	def params(self, arr):
@@ -139,7 +156,7 @@ class Append():
 	def AssignmentExpression(self, obj):
 		if 'left' in obj:
 			self.NewLine()
-			self.append(obj['left'], False, False, self.calleeArguments==False)
+			self.append(obj['left'], False, False)
 		if 'operator' in obj:
 			self.str.append(obj['operator'])
 		if 'right' in obj:
@@ -200,6 +217,9 @@ class Append():
 
 	def Point(self):
 		self.str.append('.')
+
+	def DoublePoint(self):
+		self.str.append(':')
 
 	def DotComma(self):
 		self.str.append(';')

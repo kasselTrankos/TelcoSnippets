@@ -26,6 +26,10 @@ class Asserts():
 		if 'type' in obj:
 			return obj['type']=='ArrayExpression'
 		return False
+	def Property(self, obj):
+		if 'type' in obj:
+			return obj['type']=='Property'
+		return False
 	def MemberExpression(self, obj):
 		if 'type' in obj:
 			return obj['type']=='MemberExpression'
