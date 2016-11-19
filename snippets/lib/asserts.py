@@ -7,18 +7,29 @@ class Asserts():
 		return False
 
 	def ExpressionStatement(self, obj):
-		return obj['type']=='ExpressionStatement'
+		if 'type' in obj:
+			return obj['type']=='ExpressionStatement'
+		return False
 	def AssignmentExpression(self, obj):
-		return obj['type']=='AssignmentExpression'
-
+		if 'type' in obj:
+			return obj['type']=='AssignmentExpression'
+		return False
 	def Arguments(self, obj):
-		return 'arguments' in obj
+		if 'type' in obj:
+			return 'arguments' in obj
+		return False
 	def CallExpression(self, obj):
-		return obj['type']=='CallExpression'
+		if 'type' in obj:
+			return obj['type']=='CallExpression'
+		return False
 	def ArrayExpression(self, obj):
-		return obj['type']=='ArrayExpression'
+		if 'type' in obj:
+			return obj['type']=='ArrayExpression'
+		return False
 	def MemberExpression(self, obj):
-		return obj['type']=='MemberExpression'
+		if 'type' in obj:
+			return obj['type']=='MemberExpression'
+		return False
 	def Identifier(self, obj):
 		if 'type' in obj:
 			return obj['type']=='Identifier'
@@ -28,9 +39,13 @@ class Asserts():
 			return obj['type']=='UnaryExpression'
 		return False
 	def FunctionExpression(self, obj):
-		return obj['type']=='FunctionExpression'
+		if 'type' in obj:
+			return obj['type']=='FunctionExpression'
+		return False
 	def ObjectExpression(self, obj):
-		return obj['type']=='ObjectExpression'
+		if 'type' in obj:
+			return obj['type']=='ObjectExpression'
+		return False
 	def gotCallee(self, obj):
 		return obj['callee']
 	def gotObject(self, obj):

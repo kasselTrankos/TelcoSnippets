@@ -49,7 +49,6 @@ class Append():
 		self.append(obj['expression'])
 
 	def CallExpression(self, obj, _append=[]):
-		modes = False
 		self.NewLine()
 		if isinstance(obj, pyesprima.jsdict):
 			o = obj.__dict__
@@ -60,9 +59,7 @@ class Append():
 			self.Parentesis()
 
 			if 'arguments' in obj:
-				l = len(obj['arguments'])
-				for i in range(l):
-					self.append(obj['arguments'][i], False, False, False, i>0)
+				self.append(obj['arguments'])
 			self.Parentesis(False, True)
 
 	def ObjectExpression(self, obj):
@@ -73,9 +70,9 @@ class Append():
 			self.NewLine()
 		if addDotPoint:
 			self.Point()
+		self.str.append(elm['name'])
 		if addComma:
 			self.Comma()
-		self.str.append(elm['name'])
 
 	def getItems(self, obj):
 		if isinstance(obj, dict):
@@ -108,14 +105,20 @@ class Append():
 		self.str.append('function')
 		self.Parentesis()
 		if 'params' in obj:
-			self.Arguments(obj, 'params')
+			self.Tab()
+			self.params(obj['params'])
+			self.Tab(False, False, True)
 		self.Parentesis(False, True)
 		self.KeyBrackets()
 		if 'body' in obj:
 			self.Body(obj)
 		self.KeyBrackets(False, True)
+	def params(self, arr):
+		l = len(arr)
 
-
+		for i in range(l):
+			self.NewLine()
+			self.append(arr[i], False, False, True, i<l)
 	def Body(self, obj):
 		_body = []
 		self.Tab()
@@ -141,15 +144,17 @@ class Append():
 		if(l>4):
 			self.Tab()
 		for  i in range(l):
-			self.append(obj['elements'][i], False, True, False, i<l)
+			self.append(obj['elements'][i], False, True, l>4, i<l)
 		if(l>4):
 			self.Tab(False, False, True)
 		self.Brackets(False, True)
 	def Arguments(self, args, nodeName='arguments'):
 
 		l =len(args[nodeName])
+
 		if l>4:
 			self.Tab()
+
 		for i in range(l):
 			self.append(args[nodeName][i], False, l>4, l>4, i>0)
 		if l>4:
