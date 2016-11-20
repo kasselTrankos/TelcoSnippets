@@ -57,6 +57,7 @@ class Append():
 		self.str.append(obj['argument']['raw'])
 	def ExpressionStatement(self, obj):
 		self.append(obj['expression'])
+		self.DotComma()
 
 	def LogicalExpression(self, obj):
 		if 'left' in obj:
@@ -78,11 +79,13 @@ class Append():
 				if len(obj['arguments'])>0:
 					self.CallExpression_arguments(obj['arguments'])
 			self.Parentesis(False, True)
-			self.DotComma()
+
 	def CallExpression_arguments(self, obj):
 		l = len(obj)
 		for i in range(l):
-			self.append(obj[i], False, False, False, i<l-1)
+			self.append(obj[i], False, False, False)
+			if i<l-1:
+				self.Comma()
 	def ObjectExpression(self, obj):
 		self.KeyBrackets()
 		if 'properties' in obj:
@@ -125,8 +128,6 @@ class Append():
 		if raw == None:
 			raw = 'false'
 		self.str.append(raw)
-		if addDotPoint:
-			self.DotComma()
 		if addComma:
 			self.Comma()
 		if addNewLine:
@@ -166,7 +167,6 @@ class Append():
 			self.str.append(obj['operator'])
 		if 'right' in obj:
 			self.append(obj['right'], False, False, False)
-			self.DotComma()
 		if 'callee' in obj:
 			self.append(obj['callee'], False, False, False)
 
@@ -200,7 +200,11 @@ class Append():
 				self.append(v, addDotPoint, addNewLine, addTabs )
 		for k,v in o.items():
 			if k== 'property':
+				if self.asserts.Literal(v):
+					self.Brackets()
 				self.append(v, True, False, False)
+				if self.asserts.Literal(v):
+					self.Brackets(False, True)
 
 	def Tab(self, append=True, join=False, quit=False):
 		if append:
