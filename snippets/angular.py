@@ -24,7 +24,6 @@ class Angular():
 		f.close()
 	def doStr(self, json):
 		self.read(json['body'])
-		rspec_print('STR:: is : '+str(self.append.getStr()))
 		js =  ''.join(self.append.getStr())
 		opts = jsbeautifier.default_options()
 		opts.indent_size = 2
@@ -32,4 +31,4 @@ class Angular():
 	def read(self, content):
 		for el in content:
 			if self.asserts.ExpressionStatement(el):
-				self.append.add(el['expression'])
+				self.append.append(el['expression'])

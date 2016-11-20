@@ -172,6 +172,8 @@ class Append():
 		l = len(obj['elements'])
 		for  i in range(l):
 			self.append(obj['elements'][i], False, True, l>4, i<l-1)
+			if i<l-1:
+				self.Comma()
 		self.Brackets(False, True)
 	def Arguments(self, args, nodeName='arguments'):
 
