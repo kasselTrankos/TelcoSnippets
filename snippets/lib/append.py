@@ -13,13 +13,6 @@ class Append():
 	calleeArguments = False
 	def getStr(self):
 		return self.str
-	def add(self, obj):
-		if self.asserts.Literal(obj):
-			self.Literal(obj)
-		if self.asserts.CallExpression(obj):
-			self.CallExpression(obj)
-		if self.asserts.Arguments(obj):
-			self.Arguments(obj)
 
 	def append(self, elm, addDotPoint=False, addNewLine=False, addTabs=True, addComma=False):
 		if addTabs:
@@ -48,6 +41,17 @@ class Append():
 			self.Property(elm)
 		if self.asserts.LogicalExpression(elm):
 			self.LogicalExpression(elm)
+		if self.asserts.VariableDeclaration(elm):
+			self.VariableDeclaration(elm)
+
+	def VariableDeclaration(self, obj):
+		for d in obj['declarations']:
+			self.str.append(obj['kind'])
+			self.WhiteSpace()
+			self.append(d['id'])
+			self.str.append('=')
+			self.append(d['init'])
+
 	def UnaryExpression(self, obj):
 		self.str.append(obj['operator'])
 		self.str.append(obj['argument']['raw'])
@@ -233,6 +237,8 @@ class Append():
 		if addClose:
 			self.str.append('}')
 
+	def WhiteSpace(self):
+		self.str.append(' ')
 	def Brackets(self, addStart=True, addClose=False):
 		if addStart:
 			self.str.append('[')
