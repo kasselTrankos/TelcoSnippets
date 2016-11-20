@@ -1,3 +1,6 @@
 [submodule "pyesprima"]
 	path = pyesprima
 	url = https://github.com/kasselTrankos/pyesprima
+[submodule "js-beautify"]
+	path = js-beautify
+	url = https://github.com/beautify-web/js-beautify
