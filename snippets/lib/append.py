@@ -60,7 +60,9 @@ class Append():
 
 	def UnaryExpression(self, obj):
 		self.str.append(obj['operator'])
-		self.str.append(obj['argument']['raw'])
+		if 'argument' in obj:
+			if 'raw' in obj['argument']:
+				self.str.append(obj['argument']['raw'])
 	def ExpressionStatement(self, obj):
 		self.append(obj['expression'])
 		self.DotComma()
