@@ -30,6 +30,10 @@ class Asserts():
 		if 'type' in obj:
 			return obj['type']=='Property'
 		return False
+	def LogicalExpression(self, obj):
+		if 'type' in obj:
+			return obj['type']=='LogicalExpression'
+		return False
 	def MemberExpression(self, obj):
 		if 'type' in obj:
 			return obj['type']=='MemberExpression'

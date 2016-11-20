@@ -4,3 +4,6 @@
 [submodule "pyesprima"]
 	path = pyesprima
 	url = https://github.com/kasselTrankos/pyesprima
+[submodule "sublimetext-codeformatter"]
+	path = sublimetext-codeformatter
+	url = https://github.com/akalongman/sublimetext-codeformatter

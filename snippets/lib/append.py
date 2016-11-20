@@ -46,12 +46,21 @@ class Append():
 			self.UnaryExpression(elm)
 		if self.asserts.Property(elm):
 			self.Property(elm)
+		if self.asserts.LogicalExpression(elm):
+			self.LogicalExpression(elm)
 	def UnaryExpression(self, obj):
 		self.str.append(obj['operator'])
 		self.str.append(obj['argument']['raw'])
 	def ExpressionStatement(self, obj):
 		self.append(obj['expression'])
 
+	def LogicalExpression(self, obj):
+		if 'left' in obj:
+			self.append(obj['left'], False, False, False)
+		if 'operator' in obj:
+			self.str.append(obj['operator'])
+		if 'right' in obj:
+			self.append(obj['right'], False, False, False)
 	def CallExpression(self, obj):
 		self.NewLine()
 		if isinstance(obj, pyesprima.jsdict):
@@ -61,12 +70,9 @@ class Append():
 		if 'callee' in obj:
 			self.append(obj['callee'])
 			self.Parentesis()
-
 			if 'arguments' in obj:
 				if len(obj['arguments'])>0:
-					self.calleeArguments=True
 					self.CallExpression_arguments(obj['arguments'])
-					self.calleeArguments=False
 			self.Parentesis(False, True)
 			self.DotComma()
 	def CallExpression_arguments(self, obj):
@@ -74,7 +80,6 @@ class Append():
 		for i in range(l):
 			self.append(obj[i], False, False, False, i<l-1)
 	def ObjectExpression(self, obj):
-
 		self.KeyBrackets()
 		if 'properties' in obj:
 			l = len(obj['properties'])
@@ -83,8 +88,8 @@ class Append():
 				if i<l-1:
 					self.Comma()
 		self.KeyBrackets(False, True)
-
 	def Property(self, obj):
+
 		self.NewLine()
 		self.append(obj['key'])
 		self.DoublePoint()
@@ -131,15 +136,12 @@ class Append():
 		self.Parentesis()
 		if 'params' in obj:
 			if len(obj['params'])>0:
-				self.Tab()
 				self.params(obj['params'])
-				self.Tab(False, False, True)
 		self.Parentesis(False, True)
 		self.KeyBrackets()
 		if 'body' in obj:
 			self.Body(obj)
 		self.NewLine()
-		self.Tab(False, True)
 		self.KeyBrackets(False, True)
 
 	def params(self, arr):
@@ -149,7 +151,6 @@ class Append():
 			self.append(arr[i], False, False, True, i<l-1)
 	def Body(self, obj):
 		_body = []
-		self.Tab()
 		for body in obj['body']['body']:
 			self.append(body)
 
@@ -169,24 +170,16 @@ class Append():
 
 		self.Brackets()
 		l = len(obj['elements'])
-		if(l>4):
-			self.Tab()
 		for  i in range(l):
 			self.append(obj['elements'][i], False, True, l>4, i<l-1)
-		if(l>4):
-			self.Tab(False, False, True)
 		self.Brackets(False, True)
 	def Arguments(self, args, nodeName='arguments'):
 
 		l =len(args[nodeName])
 
-		if l>4:
-			self.Tab()
 
 		for i in range(l):
 			self.append(args[nodeName][i], False, l>4, l>4, i>0)
-		if l>4:
-			self.Tab(False, False, True)
 	def MemberExpression(self, obj, addDotPoint=True, addNewLine=False, addTabs=True):
 		if addNewLine:
 			self.NewLine()
