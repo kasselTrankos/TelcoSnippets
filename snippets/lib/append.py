@@ -50,6 +50,17 @@ class Append():
 		self.str.append('if')
 		self.Parentesis()
 		self.append(obj['test'])
+		self.Parentesis(False, True)
+		self.KeyBrackets()
+		if 'consequent' in obj:
+			for consequent in obj['consequent']['body']:
+				self.append(consequent)
+		if 'alternate' in obj:
+			self.KeyBrackets(False, True)
+			self.str.append('else')
+			self.KeyBrackets()
+			self.str.append(str(obj['alternate']))
+		self.KeyBrackets(False, True)
 	def VariableDeclaration(self, obj):
 		for d in obj['declarations']:
 			self.str.append(obj['kind'])
