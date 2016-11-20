@@ -9,9 +9,9 @@ class Asserts():
 		if 'type' in obj:
 			return obj['type']=='VariableDeclaration'
 		return False
-	def VariableDeclarator(self, obj):
+	def IfStatement(self, obj):
 		if 'type' in obj:
-			return obj['type']=='VariableDeclarator'
+			return obj['type']=='IfStatement'
 		return False
 
 	def ExpressionStatement(self, obj):

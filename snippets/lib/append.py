@@ -43,7 +43,13 @@ class Append():
 			self.LogicalExpression(elm)
 		if self.asserts.VariableDeclaration(elm):
 			self.VariableDeclaration(elm)
+		if self.asserts.IfStatement(elm):
+			self.IfStatement(elm)
 
+	def IfStatement(self, obj):
+		self.str.append('if')
+		self.Parentesis()
+		self.append(obj['test'])
 	def VariableDeclaration(self, obj):
 		for d in obj['declarations']:
 			self.str.append(obj['kind'])
