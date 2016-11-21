@@ -45,6 +45,11 @@ class Append():
 			self.VariableDeclaration(elm)
 		if self.asserts.IfStatement(elm):
 			self.IfStatement(elm)
+		if self.asserts.BlockStatement(elm):
+			self.BlockStatement(elm)
+
+	def BlockStatement(self, obj):
+		self.append(obj['body'])
 
 	def IfStatement(self, obj):
 		self.str.append('if')
@@ -55,11 +60,12 @@ class Append():
 		if 'consequent' in obj:
 			for consequent in obj['consequent']['body']:
 				self.append(consequent)
-		if 'alternate' in obj:
+		if 'alternate' in obj and obj['alternate'] != None:
 			self.KeyBrackets(False, True)
 			self.str.append('else')
 			self.KeyBrackets()
-			self.str.append(str(obj['alternate']))
+			rspec_print(str(obj['alternate']))
+			self.append(obj['alternate'])
 		self.KeyBrackets(False, True)
 	def VariableDeclaration(self, obj):
 		for d in obj['declarations']:
