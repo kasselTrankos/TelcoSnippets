@@ -1,6 +1,10 @@
 from ...rspec.rspec_print import rspec_print
 class Asserts():
 
+	def BinaryExpression(self, obj):
+		if obj!=None and 'type' in obj:
+			return obj['type']=='BinaryExpression'
+		return False
 	def Literal(self, obj):
 		if obj!=None and 'type' in obj:
 			return obj['type']=='Literal'

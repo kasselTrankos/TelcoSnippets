@@ -1,162 +1,163 @@
-script = {
-	          'type': 'ExpressionStatement',
-	          'expression': {
-	            'left': {
-	              'property': {
-	                'name': 'closeSpinner',
-	                'type': 'Identifier'
-	              },
-	              'computed': "False",
-	              'object': {
-	                'name': '$scope',
-	                'type': 'Identifier'
-	              },
-	              'type': 'MemberExpression'
-	            },
-	            'right': {
-	              'id': "None",
-	              'defaults': [
+{
+                                'type': 'ExpressionStatement',
+                                'expression': {
+                                  'left': {
+                                    'computed': "false",
+                                    'property': {
+                                      'type': 'Identifier',
+                                      'name': 'closeSpinner'
+                                    },
+                                    'object': {
+                                      'type': 'Identifier',
+                                      'name': '$scope'
+                                    },
+                                    'type': 'MemberExpression'
+                                  },
+                                  'operator': '=',
+                                  'right': {
+                                    'generator': "false",
+                                    'type': 'FunctionExpression',
+                                    'id': "none",
+                                    'defaults': [
 
-	              ],
-	              'params': [
+                                    ],
+                                    'rest': "none",
+                                    'expression': "false",
+                                    'params': [
 
-	              ],
-	              'expression': "False",
-	              'type': 'FunctionExpression',
-	              'generator': "False",
-	              'body': {
-	                'type': 'BlockStatement',
-	                'body': [
-	                  {
-	                    'type': 'ExpressionStatement',
-	                    'expression': {
-	                      'arguments': [
-	                        {
-	                          'prefix': "True",
-	                          'argument': {
-	                            'raw': '1',
-	                            'value': 1.0,
-	                            'type': 'Literal'
-	                          },
-	                          'operator': '-',
-	                          'type': 'UnaryExpression'
-	                        },
-	                        {
-	                          'raw': '1',
-	                          'value': 1.0,
-	                          'type': 'Literal'
-	                        }
-	                      ],
-	                      'callee': {
-	                        'property': {
-	                          'name': 'splice',
-	                          'type': 'Identifier'
-	                        },
-	                        'computed': "False",
-	                        'object': {
-	                          'property': {
-	                            'name': 'spinners',
-	                            'type': 'Identifier'
-	                          },
-	                          'computed': "False",
-	                          'object': {
-	                            'name': '$scope',
-	                            'type': 'Identifier'
-	                          },
-	                          'type': 'MemberExpression'
-	                        },
-	                        'type': 'MemberExpression'
-	                      },
-	                      'type': 'CallExpression'
-	                    }
-	                  },
-	                  {
-	                    'test': {
-	                      'left': {
-	                        'property': {
-	                          'name': 'length',
-	                          'type': 'Identifier'
-	                        },
-	                        'computed': "False",
-	                        'object': {
-	                          'property': {
-	                            'name': 'spinners',
-	                            'type': 'Identifier'
-	                          },
-	                          'computed': "False",
-	                          'object': {
-	                            'name': '$scope',
-	                            'type': 'Identifier'
-	                          },
-	                          'type': 'MemberExpression'
-	                        },
-	                        'type': 'MemberExpression'
-	                      },
-	                      'right': {
-	                        'raw': "None",
-	                        'value': 0.0,
-	                        'type': 'Literal'
-	                      },
-	                      'operator': '===',
-	                      'type': 'BinaryExpression'
-	                    },
-	                    'consequent': {
-	                      'type': 'BlockStatement',
-	                      'body': [
-	                        {
-	                          'type': 'ExpressionStatement',
-	                          'expression': {
-	                            'arguments': [
+                                    ],
+                                    'body': {
+                                      'type': 'BlockStatement',
+                                      'body': [
+                                        {
+                                          'type': 'ExpressionStatement',
+                                          'expression': {
+                                            'arguments': [
+                                              {
+                                                'prefix': "true",
+                                                'operator': '-',
+                                                'argument': {
+                                                  'raw': '1',
+                                                  'type': 'Literal',
+                                                  'value': 1.0
+                                                },
+                                                'type': 'UnaryExpression'
+                                              },
+                                              {
+                                                'raw': '1',
+                                                'type': 'Literal',
+                                                'value': 1.0
+                                              }
+                                            ],
+                                            'callee': {
+                                              'computed': "false",
+                                              'property': {
+                                                'type': 'Identifier',
+                                                'name': 'splice'
+                                              },
+                                              'object': {
+                                                'computed': "false",
+                                                'property': {
+                                                  'type': 'Identifier',
+                                                  'name': 'spinners'
+                                                },
+                                                'object': {
+                                                  'type': 'Identifier',
+                                                  'name': '$scope'
+                                                },
+                                                'type': 'MemberExpression'
+                                              },
+                                              'type': 'MemberExpression'
+                                            },
+                                            'type': 'CallExpression'
+                                          }
+                                        },
+                                        {
+                                          'alternate': "none",
+                                          'test': {
+                                            'left': {
+                                              'computed': "false",
+                                              'property': {
+                                                'type': 'Identifier',
+                                                'name': 'length'
+                                              },
+                                              'object': {
+                                                'computed': "false",
+                                                'property': {
+                                                  'type': 'Identifier',
+                                                  'name': 'spinners'
+                                                },
+                                                'object': {
+                                                  'type': 'Identifier',
+                                                  'name': '$scope'
+                                                },
+                                                'type': 'MemberExpression'
+                                              },
+                                              'type': 'MemberExpression'
+                                            },
+                                            'operator': '===',
+                                            'right': {
+                                              'raw': '0',
+                                              'type': 'Literal',
+                                              'value': 0.0
+                                            },
+                                            'type': 'BinaryExpression'
+                                          },
+                                          'consequent': {
+                                            'type': 'BlockStatement',
+                                            'body': [
+                                              {
+                                                'type': 'ExpressionStatement',
+                                                'expression': {
+                                                  'arguments': [
 
-	                            ],
-	                            'callee': {
-	                              'property': {
-	                                'name': 'CloseSpinner',
-	                                'type': 'Identifier'
-	                              },
-	                              'computed': "False",
-	                              'object': {
-	                                'name': 'PopupService',
-	                                'type': 'Identifier'
-	                              },
-	                              'type': 'MemberExpression'
-	                            },
-	                            'type': 'CallExpression'
-	                          }
-	                        },
-	                        {
-	                          'type': 'ExpressionStatement',
-	                          'expression': {
-	                            'left': {
-	                              'property': {
-	                                'name': 'isOpenSpinner',
-	                                'type': 'Identifier'
-	                              },
-	                              'computed': "False",
-	                              'object': {
-	                                'name': '$scope',
-	                                'type': 'Identifier'
-	                              },
-	                              'type': 'MemberExpression'
-	                            },
-	                            'right': {
-	                              'raw': "None",
-	                              'value': "False",
-	                              'type': 'Literal'
-	                            },
-	                            'operator': '=',
-	                            'type': 'AssignmentExpression'
-	                          }
-	                        }
-	                      ]
-	                    },
-	                    'alternate': "None",
-	                    'type': 'IfStatement'
-	                  }
-	                ]
-	              }
-	            },
-	            'operator': '=',
-	            'type': 'AssignmentExpression'
-	          }
-	        }
+                                                  ],
+                                                  'callee': {
+                                                    'computed': "false",
+                                                    'property': {
+                                                      'type': 'Identifier',
+                                                      'name': 'CloseSpinner'
+                                                    },
+                                                    'object': {
+                                                      'type': 'Identifier',
+                                                      'name': 'PopupService'
+                                                    },
+                                                    'type': 'MemberExpression'
+                                                  },
+                                                  'type': 'CallExpression'
+                                                }
+                                              },
+                                              {
+                                                'type': 'ExpressionStatement',
+                                                'expression': {
+                                                  'left': {
+                                                    'computed': "false",
+                                                    'property': {
+                                                      'type': 'Identifier',
+                                                      'name': 'isOpenSpinner'
+                                                    },
+                                                    'object': {
+                                                      'type': 'Identifier',
+                                                      'name': '$scope'
+                                                    },
+                                                    'type': 'MemberExpression'
+                                                  },
+                                                  'operator': '=',
+                                                  'right': {
+                                                    'raw': '"false"',
+                                                    'type': 'Literal',
+                                                    'value': "false"
+                                                  },
+                                                  'type': 'AssignmentExpression'
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          'type': 'IfStatement'
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  'type': 'AssignmentExpression'
+                                }
+                              }

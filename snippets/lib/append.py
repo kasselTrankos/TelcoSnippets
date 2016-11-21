@@ -47,9 +47,20 @@ class Append():
 			self.IfStatement(elm)
 		if self.asserts.BlockStatement(elm):
 			self.BlockStatement(elm)
+		if self.asserts.BinaryExpression(elm):
+			self.BinaryExpression(elm)
 
+	def BinaryExpression(self, obj):
+		if 'left' in obj:
+			self.append(obj['left'])
+		if 'operator' in obj:
+			self.str.append(obj['operator'])
+		if 'right' in obj:
+			self.append(obj['right'])
 	def BlockStatement(self, obj):
-		self.append(obj['body'])
+		l = len(obj['body'])
+		for i in range(l):
+			self.append(obj['body'][i])
 
 	def IfStatement(self, obj):
 		self.str.append('if')
@@ -60,13 +71,17 @@ class Append():
 		if 'consequent' in obj:
 			for consequent in obj['consequent']['body']:
 				self.append(consequent)
-		if 'alternate' in obj and obj['alternate'] != None:
-			self.KeyBrackets(False, True)
-			self.str.append('else')
-			self.KeyBrackets()
-			rspec_print(str(obj['alternate']))
-			self.append(obj['alternate'])
 		self.KeyBrackets(False, True)
+		if 'alternate' in obj and obj['alternate'] != None:
+			self.str.append('else')
+		#	if self.asserts.BlockStatement(obj['alternate']):
+		#		self.KeyBrackets()
+		#	self.WhiteSpace()
+		#	#self.KeyBrackets()
+			self.append(obj['alternate'])
+		#	self.KeyBrackets(False, True)
+		self.str.append('/* cierre de if stament end*/')
+
 	def VariableDeclaration(self, obj):
 		for d in obj['declarations']:
 			self.str.append(obj['kind'])

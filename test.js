@@ -62,6 +62,7 @@ CNT.ngModule.controller('obtConfigInformationTechCPCOLController', ['$scope', '$
 			}
 		});
 	};
+
 	/* función para cargar datos y mostrarlos en el SELECT */
 	$scope.findProductIdentificationData = function() {
 		var FindProductIdentificationData_IN = {};
