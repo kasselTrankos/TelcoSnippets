@@ -1,4 +1,4 @@
-{
+script= {
                                 'type': 'ExpressionStatement',
                                 'expression': {
                                   'left': {

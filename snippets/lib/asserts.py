@@ -5,6 +5,18 @@ class Asserts():
 		if obj!=None and 'type' in obj:
 			return obj['type']=='BinaryExpression'
 		return False
+	def SwitchStatement(self, obj):
+		if obj!=None and 'type' in obj:
+			return obj['type']=='SwitchStatement'
+		return False
+	def SwitchCase(self, obj):
+		if obj!=None and 'type' in obj:
+			return obj['type']=='SwitchCase'
+		return False
+	def VariableDeclarator(self, obj):
+		if obj!=None and 'type' in obj:
+			return obj['type']=='VariableDeclarator'
+		return False
 	def Literal(self, obj):
 		if obj!=None and 'type' in obj:
 			return obj['type']=='Literal'

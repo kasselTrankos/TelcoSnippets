@@ -49,6 +49,33 @@ class Append():
 			self.BlockStatement(elm)
 		if self.asserts.BinaryExpression(elm):
 			self.BinaryExpression(elm)
+		if self.asserts.VariableDeclarator(elm):
+			self.VariableDeclarator(elm)
+		if self.asserts.SwitchStatement(elm):
+			self.SwitchStatement(elm)
+		if self.asserts.SwitchCase(elm):
+			self.SwitchCase(elm)
+	def SwitchCase(self, obj):
+		self.str.append('case')
+		self.WhiteSpace()
+		self.append(obj['test'])
+		self.str.append(':')
+		self.NewLine()
+		for c in obj['consequent']:
+			self.append(c)
+		self.str.append('break')
+		self.DotComma()
+	def SwitchStatement(self, obj):
+		self.str.append('switch')
+		self.Parentesis()
+		if 'discriminant' in obj:
+			self.append(obj['discriminant'])
+		self.Parentesis(False, True)
+		self.KeyBrackets()
+		for c in obj['cases']:
+			self.append(c)
+		self.KeyBrackets(False, True)
+
 
 	def BinaryExpression(self, obj):
 		if 'left' in obj:
@@ -69,26 +96,25 @@ class Append():
 		self.Parentesis(False, True)
 		self.KeyBrackets()
 		if 'consequent' in obj:
-			for consequent in obj['consequent']['body']:
-				self.append(consequent)
+			self.append(obj['consequent'])
 		self.KeyBrackets(False, True)
 		if 'alternate' in obj and obj['alternate'] != None:
 			self.str.append('else')
-		#	if self.asserts.BlockStatement(obj['alternate']):
-		#		self.KeyBrackets()
-		#	self.WhiteSpace()
-		#	#self.KeyBrackets()
+			self.WhiteSpace()
 			self.append(obj['alternate'])
-		#	self.KeyBrackets(False, True)
-		self.str.append('/* cierre de if stament end*/')
 
 	def VariableDeclaration(self, obj):
+		self.str.append(obj['kind'])
+		self.WhiteSpace()
 		for d in obj['declarations']:
-			self.str.append(obj['kind'])
-			self.WhiteSpace()
-			self.append(d['id'])
-			self.str.append('=')
-			self.append(d['init'])
+			self.append(d)
+		self.DotComma()
+
+	def VariableDeclarator(self, obj):
+		self.append(obj['id'])
+		self.Equal()
+		self.append(obj['init'])
+
 
 	def UnaryExpression(self, obj):
 		self.str.append(obj['operator'])
@@ -185,7 +211,7 @@ class Append():
 		self.Parentesis(False, True)
 		self.KeyBrackets()
 		if 'body' in obj:
-			self.Body(obj)
+			self.append(obj['body'])
 		self.NewLine()
 		self.KeyBrackets(False, True)
 
@@ -194,10 +220,6 @@ class Append():
 		for i in range(l):
 			self.NewLine()
 			self.append(arr[i], False, False, True, i<l-1)
-	def Body(self, obj):
-		_body = []
-		for body in obj['body']['body']:
-			self.append(body)
 
 	def AssignmentExpression(self, obj):
 		if 'left' in obj:
@@ -211,19 +233,15 @@ class Append():
 			self.append(obj['callee'], False, False, False)
 
 	def ArrayExpression(self, obj):
-
 		self.Brackets()
 		l = len(obj['elements'])
 		for  i in range(l):
-			self.append(obj['elements'][i], False, True, l>4, i<l-1)
+			self.append(obj['elements'][i], False, True, l>4)
 			if i<l-1:
 				self.Comma()
 		self.Brackets(False, True)
 	def Arguments(self, args, nodeName='arguments'):
-
 		l =len(args[nodeName])
-
-
 		for i in range(l):
 			self.append(args[nodeName][i], False, l>4, l>4, i>0)
 	def MemberExpression(self, obj, addDotPoint=True, addNewLine=False, addTabs=True):
@@ -288,3 +306,5 @@ class Append():
 			self.str.append('[')
 		if addClose:
 			self.str.append(']')
+	def Equal(self):
+		self.str.append('=')

@@ -29,5 +29,4 @@ class Angular():
 		return jsbeautifier.beautify(js, opts)
 	def read(self, content):
 		for el in content:
-			if self.asserts.ExpressionStatement(el):
-				self.append.append(el['expression'])
+			self.append.append(el)
