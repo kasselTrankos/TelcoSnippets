@@ -1,7 +1,7 @@
 import sublime, sys, os
 from ..rspec.rspec_print import rspec_print
-from ...astParser.append import Append
-from ...astParser.asserts import Asserts
+from ..astParser.append import Append
+from ..astParser.asserts import Asserts
 
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)),'..', 'pyesprima', 'pyesprima'))
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)),'..', 'js-beautify', 'python'))

@@ -33,12 +33,13 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
     $scope.loadMultilanguageNew();
     T3_CommunicationService.subscribe( $scope, "AlertLanguageChanged", $scope.loadMultilanguageNew );
   };
-  $scope.getNameOfState = function() {};
+  $scope.getNameOfState = function() {
+    return 'cnt' + CNT.name.charAt( 0 ).toUpperCase() + CNT.name.slice( 1 ).toLowerCase() + 'State'
+  };
   $scope.setSetPreviousState = function() {
-    var previousStateData =
-      T3_StorageService.getItem( {
-        cgName: $scope.getNameOfState()
-      } );
+    var previousStateData = T3_StorageService.getItem( {
+      cgName: $scope.getNameOfState()
+    } );
     if ( previousStateData !== void0 && previousStateData !== null && previousStateData ) {
       if ( previousStateData.categorizeDisagreementPolicies ) {
         $scope.lastSearch.categorizeDisagreementPolicies = previousStateData.categorizeDisagreementPolicies;
@@ -77,7 +78,9 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
     } );
   };
   $scope.toString = function(
-    value ) {};
+    value ) {
+    return String( value )
+  };
   $scope.drawBusinessInteractionRoles = function(
     index ) {
     var i = index || 0;
@@ -91,7 +94,6 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
       }
     };
     $scope.openSpinner();
-
     manageCPContactService.manageCPContact( ManageCPContact_IN ).then( function(
       data ) {
       $scope.closeSpinner();
@@ -113,13 +115,10 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
   };
   $scope.loadMultilanguageNew = function(
     data ) {
-
     T3_CabeceraPresentacionService.resolveTranslationsCG( 'manageCPContact', gettextCatalog.currentLanguage ).then( function(
       data ) {
-      $scope.selectPerson_translation =
-        gettextCatalog.getString( 'manageCPContact-selPersonaContacto' );
-      $scope.selectContactMedium_translation =
-        gettextCatalog.getString( 'manageCPContact-selMedioContactoPlain' );
+      $scope.selectPerson_translation = gettextCatalog.getString( 'manageCPContact-selPersonaContacto' );
+      $scope.selectContactMedium_translation = gettextCatalog.getString( 'manageCPContact-selMedioContactoPlain' );
     }, function(
       err ) {} );
   };
@@ -161,8 +160,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
     $scope.firstLoad = true;
     if ( $scope.CGT_ManageCPContact_IN.customerProblem && $scope.CGT_ManageCPContact_IN.customerProblem.id ) {
       $scope.getCPContactInteractionRole( $scope.CGT_ManageCPContact_IN );
-    } else
-      $scope.getCPContactInteractionRole( $scope.CGT_ManageCPContact_IN );
+    } else $scope.getCPContactInteractionRole( $scope.CGT_ManageCPContact_IN );
   };
   $scope.closeSpinner = function() {
     $scope.spinners.splice( -1, 1 );
@@ -193,22 +191,26 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
       if ( ! ) {
         $scope.addNewBusinessInteractionRolesData( $scope.manageCPContactData.notifyPerson, $scope.manageCPContactData.tipoContacto, $scope.manageCPContactData.medioContacto, index );
       }
-    } else
-      $scope.manageCPContactData.listaTemporal.push( $scope.contTable );
+    } else $scope.manageCPContactData.listaTemporal.push( $scope.contTable );
     if ( $scope.isVisiblePersonContact ) {
       $scope.manageCPContactData.listaTemporal_1.push( $scope.contTable );
     }
     $scope.firstLoad = false;
   };
   $scope.isIn_tmp_listPartyRoles_tipo2 = function(
-    id ) {};
+    id ) {
+    return $scope.manageCPContactView.tmp_listPartyRoles_tipo2.indexOf( id ) >= 0
+  };
   $scope.getFiltered = function(
     arr,
     isLast ) {
-    if ( ! ) {}
+    if ( ! ) {
+      return arr
+    }
     var _generate = [];
     var i = 0;
     var l = arr.length;
+    return _generate
   };
   $scope.removeElement_fromLista2 = function(
     id ) {
@@ -223,6 +225,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
     }
     var i = 0;
     var l = $scope.cgtManageCPContactIn.businessInteractionRoles.length;
+    return false
   };
   $scope.clearBusinessInteractionRolesData = function() {
     if ( $scope.cgtManageCPContactIn.businessInteractionRoles && $scope.cgtManageCPContactIn.businessInteractionRoles.length ) {
@@ -243,8 +246,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
     $scope.clearBusinessInteractionRolesData();
     var _generate = [];
     var i = 0;
-    $scope.lastSearch.businessInteractionRoles =
-      angular.copy( $scope.cgtManageCPContactIn.businessInteractionRoles );
+    $scope.lastSearch.businessInteractionRoles = angular.copy( $scope.cgtManageCPContactIn.businessInteractionRoles );
     $scope.putItem();
   };
   $scope.generateContactMedium = function(
@@ -259,6 +261,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
       obj.id = contactMedium.id;
     } else
       obj.value = contactMedium.value;
+    return obj
   };
   $scope.averiguarIdioma = function(
     currentLanguage ) {
@@ -291,6 +294,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
       id: 9
     } ];
     var languageId = 0;
+    return languageId
   };
   $scope.borrarPersona = function() {
     $scope.cgtManageCPContactIn.personMediumType.person[ 0 ] = null;
@@ -305,11 +309,9 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
     var _person = $scope.manageCPContactData.notifyPerson;
     var _medios = $scope.manageCPContactView.mediosContacto;
     var isPerson = type !== void0 && type === 'person';
-    var _tContact =
-
-      $filter( 'filter' )( $scope.manageCPContactView.tiposContacto.index, {
-        id: $scope.manageCPContactData.tipoContacto.index
-      } )[ 0 ];
+    var _tContact = $filter( 'filter' )( $scope.manageCPContactView.tiposContacto.index, {
+      id: $scope.manageCPContactData.tipoContacto.index
+    } )[ 0 ];
     if ( isPerson ) {
       _person = $scope.cgtManageCPContactIn.personMediumType.person;
       _medios = $scope.manageCPContactView.personMediosContacto;
@@ -319,11 +321,9 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
     l = arr.length;
     i = 0;
     if ( $scope.cgtManageCPContactIn && $scope.cgtManageCPContactIn.businessInteractionRoles.index && $scope.cgtManageCPContactIn.businessInteractionRoles.index.contactMedium && $scope.cgtManageCPContactIn.businessInteractionRoles.index.contactMedium.id ) {
-      var value =
-
-        $filter( 'filter' )( $scope.manageCPContactView.mediosContacto.index, {
-          id: $scope.cgtManageCPContactIn.businessInteractionRoles.index.contactMedium.id
-        } )[ 0 ];
+      var value = $filter( 'filter' )( $scope.manageCPContactView.mediosContacto.index, {
+        id: $scope.cgtManageCPContactIn.businessInteractionRoles.index.contactMedium.id
+      } )[ 0 ];
       $scope.manageCPContactData.medioContacto.index = value;
       $scope.addFila( index, true );
       if ( $scope.cgtManageCPContactIn.businessInteractionRolesindex + 1 ) {
@@ -344,9 +344,12 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
   $scope.isUniquePerson = function(
     o,
     id ) {
-    if ( $scope.CGT_ManageCPContact_IN.action === 'C' ) {}
+    if ( $scope.CGT_ManageCPContact_IN.action === 'C' ) {
+      return false
+    }
     var i = 0;
     var l = o.length;
+    return false
   };
   $scope.generatePersonData = function(
     obj ) {
@@ -371,17 +374,16 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
     if ( $scope.CGT_ManageCPContact_IN.action === 'C' ) {
       _return.contactMedium.value = obj.contactMedium.value;
     }
+    return _return
   };
   $scope.filterDataByInteractionRoleType = function(
     type,
     obj ) {
-    var tmp =
-
-      $filter( 'filter' )( obj, {
-        interactionRoleType: {
-          id: type
-        }
-      } );
+    var tmp = $filter( 'filter' )( obj, {
+      interactionRoleType: {
+        id: type
+      }
+    } );
     var i = 0;
     var l = tmp.length;
   };
@@ -410,7 +412,6 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
     if ( DataIn.customerProblem ) {
       GetCPContactInteractionRole_IN.customerProblem = DataIn.customerProblem;
     }
-
     manageCPContactService.getCPContactInteractionRole( GetCPContactInteractionRole_IN ).then( function(
       data ) {
       $scope.closeSpinner();
@@ -432,9 +433,12 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
   };
   $scope.getTranslate = function(
     arr ) {
-    if ( arr === void0 ) {}
+    if ( arr === void0 ) {
+      return ''
+    }
     var i = 0;
     var l = arr.length;
+    return ''
   };
   $scope.listContactMediumType = function(
     index ) {
@@ -446,14 +450,12 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
       }
     };
     $scope.openSpinner();
-
     manageCPContactService.listContactMediumType( ListContactMediumType_IN ).then( function(
       data ) {
       $scope.closeSpinner();
       $scope.manageCPContactView.tiposContactoindex || 0 = data.contactMediumTypes;
       if ( $scope.cgtManageCPContactIn.businessInteractionRolesindex || 0 && $scope.cgtManageCPContactIn.businessInteractionRolesindex || 0. contactMedium && $scope.cgtManageCPContactIn.businessInteractionRolesindex || 0. contactMedium.contactMediumType && $scope.cgtManageCPContactIn.businessInteractionRolesindex || 0. contactMedium.contactMediumType.id ) {
-        $scope.manageCPContactData.tipoContactoindex || 0 =
-          Number( $scope.cgtManageCPContactIn.businessInteractionRolesindex || 0. contactMedium.contactMediumType.id );
+        $scope.manageCPContactData.tipoContactoindex || 0 = Number( $scope.cgtManageCPContactIn.businessInteractionRolesindex || 0. contactMedium.contactMediumType.id );
         $scope.cargaMedios( index || 0 );
       }
     }, function(
@@ -490,59 +492,56 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
   };
   $scope.refreshResults = function(
     $select ) {
-    var search = $select.searchlist =
-      angular.copy( $select.items ) FLAG = -1;
-    list =
-      list.filter( function(
-        item ) {} );
+    var search = $select.searchlist = angular.copy( $select.items ) FLAG = -1;
+    list = list.filter( function(
+      item ) {
+      return item.id !== FLAG
+    } );
     if ( ! ) {
       $select.items = list;
     } else var userInputItem = {
       id: FLAG,
       name: search
     };
-    $select.items =
-      [
-        userInputItem
-      ].concat( list );
+    $select.items = [
+      userInputItem
+    ].concat( list );
     $select.selected = userInputItem;
   };
   $scope.refreshResultsMedios = function(
     $select ) {
-    var search = $select.searchlist =
-      angular.copy( $select.items ) FLAG = -1;
-    list =
-      list.filter( function(
-        item ) {} );
+    var search = $select.searchlist = angular.copy( $select.items ) FLAG = -1;
+    list = list.filter( function(
+      item ) {
+      return item.id !== FLAG
+    } );
     if ( ! ) {
       $select.items = list;
     } else var userInputItem = {
       id: FLAG,
       value: search
     };
-    $select.items =
-      [
-        userInputItem
-      ].concat( list );
+    $select.items = [
+      userInputItem
+    ].concat( list );
     $select.selected = userInputItem;
   };
   $scope.refreshResultsPersona = function(
     $select ) {
-    var search = $select.searchlist =
-      angular.copy( $select.items ) FLAG = -1;
-    list =
-      list.filter( function(
-        item ) {} );
+    var search = $select.searchlist = angular.copy( $select.items ) FLAG = -1;
+    list = list.filter( function(
+      item ) {
+      return item.id !== FLAG
+    } );
     if ( ! ) {
       $select.items = list;
     } else var userInputItem = {
       id: FLAG,
       name: search
     };
-    $select.items =
-      [
-        userInputItem
-      ].concat( list );
+    $select.items = [
+      userInputItem
+    ].concat( list );
     $select.selected = userInputItem;
   };
   $scope.removeFila = function(
@@ -552,11 +551,10 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
       $scope.manageCPContactData.medioContacto$scope.manageCPContactData.medioContacto.length - 1 = '';
       $scope.manageCPContactData.tipoContacto$scope.manageCPContactData.tipoContacto.length - 1 = '';
       $scope.manageCPContactData.notifyPerson.$scope.manageCPContactData.notifyPerson.length = '';
+      return false
     }
-    var index =
-      $scope.manageCPContactData.listaTemporal.indexOf( row );
-    var _indexOf =
-      $scope.manageCPContactView.tmp_listPartyRoles_tipo2.indexOf( $scope.manageCPContactData.notifyPerson.index );
+    var index = $scope.manageCPContactData.listaTemporal.indexOf( row );
+    var _indexOf = $scope.manageCPContactView.tmp_listPartyRoles_tipo2.indexOf( $scope.manageCPContactData.notifyPerson.index );
     if ( _indexOf >= 0 ) {
       $scope.manageCPContactView.tmp_listPartyRoles_tipo2.splice( _indexOf, 1 );
     }
@@ -568,8 +566,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
     } else var estaEnLista = false;
     if ( $scope.cgtManageCPContactIn.businessInteractionRoles.index ) {
       $scope.cgtManageCPContactIn.businessInteractionRoles.splice( index, 1 );
-      $scope.lastSearch.businessInteractionRoles =
-        angular.copy( $scope.cgtManageCPContactIn.businessInteractionRoles );
+      $scope.lastSearch.businessInteractionRoles = angular.copy( $scope.cgtManageCPContactIn.businessInteractionRoles );
       $scope.putItem();
     }
     $scope.manageCPContactData.medioContacto.splice( index, 1 );
@@ -579,7 +576,9 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
   };
   $scope.isPersonSelected = function(
     value,
-    item ) {};
+    item ) {
+    return value && value.id && item && item.id && item.id === value.id
+  };
   $scope.regenerateArrayData = function(
     arr,
     type ) {
@@ -587,6 +586,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
     var l = arr.length;
     var _generate = [];
     var _obj = {};
+    return _generate
   };
 } ] ).controller( 'manageCPContactPopupController', [ '$scope', '$modalInstance', function(
   $scope,
