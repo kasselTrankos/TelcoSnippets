@@ -22,7 +22,7 @@ class Angular():
 		f.close()
 	def doStr(self, json):
 		self.read(json['body'])
-		js =  ''.join(self.append.getStr())
+		js =  ''.join(str(x) for x in self.append.getStr())
 		opts = jsbeautifier.default_options()
 		opts.space_in_paren = True
 		opts.indent_size = 2

@@ -40,7 +40,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
           var previousStateData = T3_StorageService.getItem( {
             cgName: $scope.getNameOfState()
           } );
-          if ( previousStateData !== void /*{'type': 'Literal', 'raw': '0', 'value': 0.0}*/ && previousStateData !== null && previousStateData ) {
+          if ( previousStateData !== void0 && previousStateData !== null && previousStateData ) {
             if ( previousStateData.categorizeDisagreementPolicies ) {
               $scope.lastSearch.categorizeDisagreementPolicies = previousStateData.categorizeDisagreementPolicies;
             }
@@ -156,7 +156,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
               $scope.getCPContactInteractionRole( $scope.CGT_ManageCPContact_IN );
             };
             $scope.closeSpinner = function() {
-              $scope.spinners.splice( - /*{'type': 'Literal', 'raw': '1', 'value': 1.0}*/ , 1 );
+              $scope.spinners.splice( -1, 1 );
               if ( $scope.spinners.length === 0 ) {
                 PopupService.CloseSpinner();
                 $scope.isOpenSpinner = false;
@@ -164,7 +164,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
             };
             $scope.openSpinner = function() {
               $scope.spinners.push( 1 );
-              if ( ! /*{'type': 'MemberExpression', 'object': {'name': '$scope', 'type': 'Identifier'}, 'property': {'name': 'isOpenSpinner', 'type': 'Identifier'}, 'computed': False}*/ ) {
+              if ( !$scope.isOpenSpinner ) {
                 $scope.isOpenSpinner = true;
                 PopupService.getSpinner( $scope );
               }
@@ -172,14 +172,14 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
             $scope.addFila = function( index, addedByState ) {
                 addedByState = addedByState || false;;
                 $scope.manageCPContactView.filteredListPartyRoles = [];
-                if ( ! /*{'type': 'MemberExpression', 'object': {'name': '$scope', 'type': 'Identifier'}, 'property': {'name': 'firstLoad', 'type': 'Identifier'}, 'computed': False}*/ ) {
+                if ( !$scope.firstLoad ) {
                   var _index = index + 1;
                   $scope.removeElement_fromLista2( $scope.manageCPContactData.notifyPerson[ index ] );
                   $scope.manageCPContactData.tipoContacto[ _index ] = '';
                   $scope.manageCPContactData.medioContacto[ _index ] = '';
                   $scope.manageCPContactData.notifyPerson[ _index ] = '';
                   $scope.manageCPContactData.listaTemporal.push( $scope.contTable );
-                  if ( ! /*{'name': 'addedByState', 'type': 'Identifier'}*/ ) {
+                  if ( !addedByState ) {
                     $scope.addNewBusinessInteractionRolesData( $scope.manageCPContactData.notifyPerson, $scope.manageCPContactData.tipoContacto, $scope.manageCPContactData.medioContacto, index );
                   }
                 } else {
@@ -193,7 +193,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                   return $scope.manageCPContactView.tmp_listPartyRoles_tipo2.indexOf( id ) >= 0
                 };
                 $scope.getFiltered = function( arr, isLast ) {
-                  if ( ! /*{'name': 'isLast', 'type': 'Identifier'}*/ ) {
+                  if ( !isLast ) {
                     return arr
                   }
                   var _generate = [];
@@ -208,7 +208,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                   var _tmp = [];
                 };
                 $scope.findPersonContact_fromBussiness = function() {
-                  if ( ! /*{'type': 'MemberExpression', 'object': {'name': '$scope', 'type': 'Identifier'}, 'property': {'name': 'cgtManageCPContactInbusinessInteractionRoles', 'type': 'Identifier'}, 'computed': False}*/ ) {
+                  if ( !$scope.cgtManageCPContactInbusinessInteractionRoles ) {
                     $scope.cgtManageCPContactInbusinessInteractionRoles = [];
                   }
                   var i = 0;
@@ -243,7 +243,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                         id: contactMediumType
                       }
                     };
-                    if ( contactMedium.id !== - /*{'type': 'Literal', 'raw': '1', 'value': 1.0}*/ ) {
+                    if ( contactMedium.id !== -1 ) {
                       obj.id = contactMedium.id;
                     } else {
                       obj.value = contactMedium.value;
@@ -291,7 +291,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                       var l = arr.length;
                       var _person = $scope.manageCPContactData.notifyPerson;
                       var _medios = $scope.manageCPContactView.mediosContacto;
-                      var isPerson = type !== void /*{'type': 'Literal', 'raw': '0', 'value': 0.0}*/ && type === 'person';
+                      var isPerson = type !== void0 && type === 'person';
                       var _tContact = $filter( 'filter' )( $scope.manageCPContactView.tiposContacto[ index ], {
                         id: $scope.manageCPContactData.tipoContacto[ index ]
                       } )[ 0 ];
@@ -318,10 +318,10 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                       $scope.listContactMediumType( index );
                     };
                     $scope.desplegar = function() {
-                      $scope.visible = ! /*{'type': 'MemberExpression', 'object': {'name': '$scope', 'type': 'Identifier'}, 'property': {'name': 'visible', 'type': 'Identifier'}, 'computed': False}*/ ;
+                      $scope.visible = !$scope.visible;
                     };
                     $scope.desplegarNotification = function() {
-                      $scope.visibleNotification = ! /*{'type': 'MemberExpression', 'object': {'name': '$scope', 'type': 'Identifier'}, 'property': {'name': 'visibleNotification', 'type': 'Identifier'}, 'computed': False}*/ ;
+                      $scope.visibleNotification = !$scope.visibleNotification;
                     };
                     $scope.isUniquePerson = function( o, id ) {
                       if ( $scope.CGT_ManageCPContact_IN.action === 'C' ) {
@@ -406,7 +406,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                       } );
                     };
                     $scope.getTranslate = function( arr ) {
-                      if ( arr === void /*{'type': 'Literal', 'raw': '0', 'value': 0.0}*/ ) {
+                      if ( arr === void0 ) {
                         return ''
                       }
                       var i = 0;
@@ -461,11 +461,11 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                       PopupService.getPopupGeneric( $scope, 'manageCPContactPopupController', options );
                     };
                     $scope.refreshResults = function( $select ) {
-                        var search = $select.searchlist = angular.copy( $select.items ) FLAG = - /*{'type': 'Literal', 'raw': '1', 'value': 1.0}*/ ;
+                        var search = $select.searchlist = angular.copy( $select.items ) FLAG = -1;
                         list = list.filter( function( item ) {
                           return item.id !== FLAG
                         } );
-                        if ( ! /*{'name': 'search', 'type': 'Identifier'}*/ ) {
+                        if ( !search ) {
                           $select.items = list;
                         } else {
                           var userInputItem = {
@@ -478,11 +478,11 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                           $select.selected = userInputItem;
                         };
                         $scope.refreshResultsMedios = function( $select ) {
-                          var search = $select.searchlist = angular.copy( $select.items ) FLAG = - /*{'type': 'Literal', 'raw': '1', 'value': 1.0}*/ ;
+                          var search = $select.searchlist = angular.copy( $select.items ) FLAG = -1;
                           list = list.filter( function( item ) {
                             return item.id !== FLAG
                           } );
-                          if ( ! /*{'name': 'search', 'type': 'Identifier'}*/ ) {
+                          if ( !search ) {
                             $select.items = list;
                           } else {
                             var userInputItem = {
@@ -495,11 +495,11 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                             $select.selected = userInputItem;
                           };
                           $scope.refreshResultsPersona = function( $select ) {
-                            var search = $select.searchlist = angular.copy( $select.items ) FLAG = - /*{'type': 'Literal', 'raw': '1', 'value': 1.0}*/ ;
+                            var search = $select.searchlist = angular.copy( $select.items ) FLAG = -1;
                             list = list.filter( function( item ) {
                               return item.id !== FLAG
                             } );
-                            if ( ! /*{'name': 'search', 'type': 'Identifier'}*/ ) {
+                            if ( !search ) {
                               $select.items = list;
                             } else {
                               var userInputItem = {
