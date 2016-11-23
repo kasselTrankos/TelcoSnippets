@@ -26,7 +26,7 @@ class Angular():
 		js =  ''.join(str(x) for x in self.append.getStr())
 		opts = jsbeautifier.default_options()
 		opts.space_in_paren = True
-		opts.indent_size = 2
+		opts.indent_size = 4
 		return jsbeautifier.beautify(js, opts)
 	def read(self, content):
 		for el in content:
