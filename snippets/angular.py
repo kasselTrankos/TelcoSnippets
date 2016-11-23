@@ -21,6 +21,7 @@ class Angular():
 		f.write(self.doStr(json))
 		f.close()
 	def doStr(self, json):
+		self.append.init()
 		self.read(json['body'])
 		js =  ''.join(str(x) for x in self.append.getStr())
 		opts = jsbeautifier.default_options()

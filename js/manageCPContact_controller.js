@@ -80,6 +80,14 @@ CNT.ngModule.controller('manageCPContactController',
                 }
             }
         };
+        function volcar_propiedades(obj, obj_nombre) {
+          var resultado = "";
+          for (var i in obj) {
+            resultado += obj_nombre + "." + i + " = " + obj[i] + "<br>";
+          }
+          resultado += "<hr>";
+          return resultado;
+        }
         $scope.setStateData = function(data){
             $scope.cgtManageCPContactIn.businessInteractionRoles = data.businessInteractionRoles || [];
             if($scope.cgtManageCPContactIn.businessInteractionRoles.length>0) {

@@ -13,8 +13,7 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
         T3_StorageService,
         $parse ) {
         $scope.init = function() {
-          for (
-            paso = 0; paso < 5; paso++ ) {
+          for ( paso = 0; paso < 5; paso++ ) {
             console.log( 'Dando un paso al Este' );
           }
           $scope.showPersonContact = false;
@@ -61,6 +60,15 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
             }
           }
         };
+
+        function volcar_propiedades( obj, obj_nombre ) {
+          var resultado = "";
+          for ( var i in obj ) {
+            resultado += obj_nombre + "." + i + " = " + obj[ i ] + "<br>";
+          }
+          resultado += "<hr>";
+          return resultado
+        }
         $scope.setStateData = function( data ) {
           $scope.cgtManageCPContactIn.businessInteractionRoles = data.businessInteractionRoles || [];
           if ( $scope.cgtManageCPContactIn.businessInteractionRoles.length > 0 ) {
@@ -529,13 +537,11 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                       var l = $scope.ManageCPContact_OUT.length;
                       for ( i; i < l; i++ ) {
                         if ( $scope.ManageCPContact_OUT[ i ].interactionRoleType.id === 2 ) {
-                          $scope.isVisibleNotification =
-                            $scope.visibleNotification = true;
+                          $scope.isVisibleNotification = $scope.visibleNotification = true;
                           $scope.notificationContactMediumTypeCategory = $scope.ManageCPContact_OUT[ i ].contactMediumTypeCategory.id;
                         }
                         if ( $scope.ManageCPContact_OUT[ i ].interactionRoleType.id === 3 ) {
-                          $scope.isVisiblePersonContact =
-                            $scope.visiblePerson = true;
+                          $scope.isVisiblePersonContact = $scope.visiblePerson = true;
                           $scope.personContactMediumTypeCategory = $scope.ManageCPContact_OUT[ i ].contactMediumTypeCategory.id;
                         }
                       }
@@ -556,7 +562,9 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                       PopupService.getPopupGeneric( $scope, 'manageCPContactPopupController', options );
                     };
                     $scope.refreshResults = function( $select ) {
-                        var search = $select.searchlist = angular.copy( $select.items ) FLAG = -1;
+                        var search = $select.search;
+                        list = angular.copy( $select.items );
+                        FLAG = -1;
                         list = list.filter( function( item ) {
                           return item.id !== FLAG
                         } );
@@ -573,7 +581,9 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                           $select.selected = userInputItem;
                         };
                         $scope.refreshResultsMedios = function( $select ) {
-                            var search = $select.searchlist = angular.copy( $select.items ) FLAG = -1;
+                            var search = $select.search;
+                            list = angular.copy( $select.items );
+                            FLAG = -1;
                             list = list.filter( function( item ) {
                               return item.id !== FLAG
                             } );
@@ -590,7 +600,9 @@ CNT.ngModule.controller( 'manageCPContactController', [ 'manageCPContactService'
                               $select.selected = userInputItem;
                             };
                             $scope.refreshResultsPersona = function( $select ) {
-                              var search = $select.searchlist = angular.copy( $select.items ) FLAG = -1;
+                              var search = $select.search;
+                              list = angular.copy( $select.items );
+                              FLAG = -1;
                               list = list.filter( function( item ) {
                                 return item.id !== FLAG
                               } );
