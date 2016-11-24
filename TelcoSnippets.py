@@ -4,8 +4,6 @@ from .snippets.angular import Angular
 from .pyjsparser.pyjsparser import PyJsParser
 #from .slimit.src.slimit.parser import Parser
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pyesprima', 'pyesprima'))
-#sublime.message_dialog(sys.version_info)
-#sublime.message_dialog(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'pyesprima', 'pyesprima'))
 import pyesprima
 
 BASE_PATH = os.path.abspath(os.path.dirname(__file__))

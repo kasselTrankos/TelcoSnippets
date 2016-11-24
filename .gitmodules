@@ -7,3 +7,6 @@
 [submodule "pyesprima"]
 	path = pyesprima
 	url = https://github.com/kasselTrankos/pyesprima
+[submodule "toolz"]
+	path = toolz
+	url = https://github.com/pytoolz/toolz
