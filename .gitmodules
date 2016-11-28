@@ -13,3 +13,15 @@
 [submodule "python-jsonpath-rw"]
 	path = python-jsonpath-rw
 	url = https://github.com/kennknowles/python-jsonpath-rw
+[submodule "ply"]
+	path = ply
+	url = https://github.com/dabeaz/ply
+[submodule "dpath-python"]
+	path = dpath-python
+	url = https://github.com/akesterson/dpath-python
+[submodule "ObjectPath"]
+	path = ObjectPath
+	url = https://github.com/adriank/ObjectPath
+[submodule "jmespath.py"]
+	path = jmespath.py
+	url = https://github.com/jmespath/jmespath.py
