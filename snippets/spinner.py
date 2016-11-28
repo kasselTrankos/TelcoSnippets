@@ -34,9 +34,11 @@ class Spinner:
             sort_keys=True, indent=1))
 		#body[?type=='ExpressionStatement'].expression.arguments[-1].elements[-1].body.body[]
 		#.arguments[-1].elements[-1].body.body[][?expression.left.property.name=='init'].expression.right[?type=='FunctionExpression'].body[?type=='BlockStatement'].body
-		results = jmespath.search("body[?type=='ExpressionStatement'].expression.arguments[-1][?type=='ArrayExpression'].elements[-1][?type=='FunctionExpression']", js)
+		results = jmespath.search("body[?type=='ExpressionStatement'].expression.arguments[-1][?type=='ArrayExpression'].elements[-1][?type=='FunctionExpression'].body[?type=='BlockStatement']", js)
+		r =  jmespath.search("[].body[?expression.left.property.name=='init']", results)
 		#results = [match.value for match in parse("$[*].`this`('ExpressionStatement')").find(body)]
 		rspec_print('FOND JSON '+str(results))
+		rspec_print('FOND JSON '+str(r))
 		#self.logger.info(js);
 		#funcInit = findFunction('init', body)
 		#tree=Tree(str(body))
