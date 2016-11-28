@@ -10,3 +10,6 @@
 [submodule "toolz"]
 	path = toolz
 	url = https://github.com/pytoolz/toolz
+[submodule "python-jsonpath-rw"]
+	path = python-jsonpath-rw
+	url = https://github.com/kennknowles/python-jsonpath-rw
